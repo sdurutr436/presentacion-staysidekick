@@ -154,6 +154,30 @@
         max-height: 60vh;
       }
 
+      .reveal pre.mermaid {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        font-size: 1em;
+        line-height: 1;
+        max-height: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0.6em 0;
+      }
+
+      .reveal pre.mermaid svg {
+        max-width: 100%;
+        max-height: 62vh;
+        height: auto;
+      }
+
+      .reveal pre.mermaid .edgeLabel {
+        color: var(--ss-fg) !important;
+        font-size: 0.85em;
+      }
+
       .reveal .ascii {
         font-family: 'JetBrains Mono', ui-monospace, monospace;
         font-size: 0.55em;
@@ -365,18 +389,28 @@
         <section>
           <em class="kicker">Stack</em>
           <h2>Una arquitectura, cinco contenedores</h2>
-          <div class="grid-3">
-            <div class="card"><h4>Sitio público</h4><p>11ty · Nunjucks · SCSS</p></div>
-            <div class="card"><h4>Panel SPA</h4><p>Angular 21 · Signals</p></div>
-            <div class="card"><h4>API</h4><p>Flask · Gunicorn · Marshmallow</p></div>
-            <div class="card"><h4>Datos</h4><p>PostgreSQL 16 · Fernet</p></div>
-            <div class="card"><h4>Borde</h4><p>Nginx · CSP estricta</p></div>
-            <div class="card"><h4>Despliegue</h4><p>Docker Compose · Railway</p></div>
-          </div>
+          <pre class="mermaid">
+graph TD
+    Cliente(["Cliente HTTP"])
+
+    subgraph app_net["app-net · red interna Docker"]
+        Nginx["nginx · Nginx:alpine · :80"]
+        Frontend["frontend · Angular + Nginx · :80"]
+        Web["web · 11ty + Nginx · :80"]
+        Backend["backend · Flask + Gunicorn · :5000"]
+        Postgres[("postgres · PostgreSQL 16 · :5432")]
+    end
+
+    Cliente -->|"HTTP :80 — único puerto expuesto"| Nginx
+    Nginx -->|"/api/*"| Backend
+    Nginx -->|"/menu/*"| Frontend
+    Nginx -->|"/*"| Web
+    Backend -->|"SQL :5432"| Postgres
+          </pre>
           <aside class="notes">
-            En el stack hay tres frentes web: el sitio público en 11ty, la SPA del panel en Angular 21
-            y la API en Flask. Por debajo, PostgreSQL y Nginx como puerta única. Todo en Docker, todo
-            desplegable en Railway.
+            Esta es la topología de cinco contenedores. El cliente solo ve el puerto 80 del Nginx
+            externo, que reparte: barra api al backend Flask, barra menú a Angular, barra raíz al
+            sitio 11ty. Detrás, el backend habla con Postgres. Todo dentro de una red Docker privada.
           </aside>
         </section>
 
@@ -596,34 +630,10 @@ class ApartamentoCreateSchema(Schema):
           </aside>
         </section>
 
-        <!-- ─────────────────────────  15. DEVOPS ARQUITECTURA  ─────────────────── -->
-        <section>
-          <em class="kicker">DevOps · 1/4</em>
-          <h2>Arquitectura Docker — una sola puerta</h2>
-          <div class="ascii">
-┌────────── Host ──────────┐         ┌─────────── app-net (Docker) ───────────┐
-│                          │         │                                         │
-│   Navegador ─────HTTP:80─┼────────▶│  ┌─────────────┐                        │
-│                          │         │  │   nginx     │  /api/*  ──▶ backend  │
-└──────────────────────────┘         │  │  (alpine)   │  /menu/* ──▶ frontend │
-                                     │  └─────────────┘  /*      ──▶ web      │
-                                     │                                         │
-                                     │  backend (Flask)  ──▶  postgres:16     │
-                                     │  frontend (Angular + nginx interno)    │
-                                     │  web      (11ty    + nginx interno)    │
-                                     └─────────────────────────────────────────┘
-          </div>
-          <p class="muted">El único puerto expuesto al host es el <strong>80</strong>. El resto vive en la red privada <code>app-net</code>.</p>
-          <aside class="notes">
-            Cinco contenedores, una sola puerta. Solo Nginx expone el puerto 80 al host. Todos los
-            demás servicios viven en una red Docker privada y se hablan por nombre. Esto reduce la
-            superficie de ataque a una sola línea de configuración.
-          </aside>
-        </section>
 
         <!-- ─────────────────────────  16. LOS DOS NGINX  ─────────────────── -->
         <section>
-          <em class="kicker">DevOps · 2/4 · El detalle que no se ve</em>
+          <em class="kicker">DevOps · 1/3 · El detalle que no se ve</em>
           <h2>En realidad hay <span class="pill">dos</span> Nginx</h2>
           <div class="grid-2">
             <div class="card fragment">
@@ -649,7 +659,7 @@ class ApartamentoCreateSchema(Schema):
 
         <!-- ─────────────────────────  17. CSP HASHES  ─────────────────── -->
         <section>
-          <em class="kicker">DevOps · 3/4 · Caso real de debugging</em>
+          <em class="kicker">DevOps · 2/3 · Caso real de debugging</em>
           <h2>CSP estricta vs. scripts del 11ty</h2>
           <pre><code class="language-nginx" data-trim data-noescape>
 add_header Content-Security-Policy "
@@ -676,7 +686,7 @@ add_header Content-Security-Policy "
 
         <!-- ─────────────────────────  18. RAILWAY  ─────────────────── -->
         <section>
-          <em class="kicker">DevOps · 4/4</em>
+          <em class="kicker">DevOps · 3/3</em>
           <h2>Railway · DNS interno que cambia cada deploy</h2>
           <pre><code class="language-nginx" data-trim data-noescape>
 # DNS resolver interno de Railway — TTL 1s
@@ -743,7 +753,30 @@ location /api/ {
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-    <script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs';
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        securityLevel: 'loose',
+        themeVariables: {
+          fontFamily: 'Archivo, sans-serif',
+          background: 'transparent',
+          primaryColor: '#2a2620',
+          primaryTextColor: '#efe3bc',
+          primaryBorderColor: '#d9b87a',
+          secondaryColor: '#1c1c1c',
+          tertiaryColor: '#141414',
+          lineColor: '#d9b87a',
+          edgeLabelBackground: '#1c1c1c',
+          clusterBkg: 'rgba(239, 227, 188, 0.04)',
+          clusterBorder: 'rgba(239, 227, 188, 0.3)',
+          textColor: '#e8e2d4',
+        },
+        flowchart: { curve: 'basis', padding: 14 },
+      });
+
       Reveal.initialize({
         hash: true,
         slideNumber: 'c/t',
@@ -755,6 +788,14 @@ location /api/ {
         backgroundTransition: 'fade',
         plugins: [RevealHighlight, RevealNotes],
       });
+
+      const renderMermaid = async () => {
+        const pending = document.querySelectorAll('pre.mermaid:not([data-processed])');
+        if (pending.length) await mermaid.run({ nodes: pending });
+      };
+
+      Reveal.on('ready', renderMermaid);
+      Reveal.on('slidechanged', renderMermaid);
     </script>
   </body>
 </html>
