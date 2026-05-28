@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" id="theme" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,18 +17,35 @@
     />
 
     <style>
+      /* ─────────────────────────────────────────────────────────────────────
+         PALETA CORPORATIVA — extraída de frontend/src/styles/settings/
+         (_css-variables.scss · modo oscuro + acento ámbar fijo)
+         ───────────────────────────────────────────────────────────────────── */
       :root {
-        --ss-bg: #1c1c1c;
-        --ss-bg-deep: #141414;
-        --ss-fg: #e8e2d4;
-        --ss-muted: #a8a39a;
-        --ss-accent: #efe3bc;
-        --ss-accent-strong: #d9b87a;
-        --ss-accent-fg: #5d423a;
-        --ss-success: #6ecf76;
-        --ss-warn: #f0b35a;
-        --ss-danger: #d97c7c;
-        --ss-border: rgba(239, 227, 188, 0.18);
+        --ss-bg:           hsl(0, 0%, 16.86%);   /* --background dark · #2B2B2B */
+        --ss-bg-deep:      hsl(0, 0%, 12.94%);   /* --sidebar dark · #212121 */
+        --ss-card:         hsl(0, 0%, 20%);      /* --card dark · #333333 */
+        --ss-muted-bg:     hsl(0, 0%, 27.06%);   /* --muted dark · #454545 */
+        --ss-border:       hsl(0, 0%, 30.98%);   /* --border dark · #4F4F4F */
+        --ss-border-strong: hsl(0, 0%, 50%);     /* --border-strong dark · #808080 */
+        --ss-fg:           hsl(0, 0%, 86.27%);   /* --foreground dark · #DCDCDC */
+        --ss-fg-soft:      hsl(0, 0%, 75.29%);   /* --secondary-foreground · #C0C0C0 */
+        --ss-muted:        hsl(0, 0%, 62.75%);   /* --muted-foreground · #A0A0A0 */
+        --ss-accent:       hsl(47.44, 64.18%, 86.86%);   /* corporate amber · #EFE3BC */
+        --ss-accent-fg:    hsl(14.21, 25.68%, 29.02%);   /* accent foreground · #5D423A */
+
+        --ss-success: hsl(122, 39%, 49%);
+        --ss-warn:    hsl(38, 92%, 50%);
+        --ss-info:    hsl(210, 75%, 50%);
+        --ss-danger:  hsl(0, 41.49%, 63.14%);
+      }
+
+      html.reveal-full-page,
+      body.reveal-viewport {
+        background:
+          radial-gradient(1000px 500px at 85% -10%, hsla(47, 64%, 87%, 0.06), transparent 60%),
+          radial-gradient(900px 500px at -10% 110%, hsla(47, 64%, 87%, 0.04), transparent 55%),
+          var(--ss-bg);
       }
 
       .reveal {
@@ -53,20 +70,12 @@
         letter-spacing: -0.01em;
         color: var(--ss-accent);
         text-transform: none;
+        margin-bottom: 0.5em;
       }
 
-      .reveal h1 {
-        font-size: 2.6em;
-        line-height: 1.05;
-      }
-      .reveal h2 {
-        font-size: 1.7em;
-        line-height: 1.1;
-      }
-      .reveal h3 {
-        font-size: 1.25em;
-        color: var(--ss-accent-strong);
-      }
+      .reveal h1 { font-size: 2.6em; line-height: 1.05; }
+      .reveal h2 { font-size: 1.7em; line-height: 1.1; }
+      .reveal h3 { font-size: 1.25em; color: var(--ss-fg); }
 
       .reveal p,
       .reveal li {
@@ -74,13 +83,20 @@
       }
 
       .reveal a {
-        color: var(--ss-accent-strong);
+        color: var(--ss-accent);
         text-decoration: none;
-        border-bottom: 1px dashed var(--ss-accent-strong);
+        border-bottom: 1px dashed var(--ss-accent);
       }
 
-      .reveal strong {
+      .reveal strong { color: var(--ss-accent); }
+
+      .reveal code {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        background: var(--ss-bg-deep);
         color: var(--ss-accent);
+        padding: 0.05em 0.35em;
+        border-radius: 4px;
+        font-size: 0.9em;
       }
 
       .reveal em.kicker {
@@ -89,9 +105,21 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.18em;
-        font-size: 0.55em;
-        color: var(--ss-accent-strong);
-        margin-bottom: 0.4em;
+        font-size: 0.5em;
+        color: var(--ss-accent);
+        margin-bottom: 0.6em;
+        padding: 0.25em 0.7em;
+        border: 1px solid var(--ss-border);
+        border-radius: 999px;
+        background: var(--ss-bg-deep);
+      }
+
+      .reveal em.kicker .nav-hint {
+        color: var(--ss-muted);
+        font-weight: 500;
+        margin-left: 0.4em;
+        text-transform: none;
+        letter-spacing: 0.05em;
       }
 
       .reveal .lead {
@@ -132,15 +160,15 @@
         content: '◆';
         position: absolute;
         left: 0;
-        color: var(--ss-accent-strong);
+        color: var(--ss-accent);
         font-size: 0.7em;
-        top: 0.5em;
+        top: 0.55em;
       }
 
       .reveal pre {
         box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
         border-radius: 10px;
-        font-size: 0.5em;
+        font-size: 0.48em;
         line-height: 1.45;
         width: 100%;
         max-height: 60vh;
@@ -150,32 +178,61 @@
         padding: 1.1em 1.3em;
         border-radius: 10px;
         font-family: 'JetBrains Mono', ui-monospace, monospace;
-        background: #0e0e0e;
+        background: var(--ss-bg-deep);
         max-height: 60vh;
+        color: var(--ss-fg);
       }
 
-      .reveal pre.mermaid {
-        background: transparent;
-        box-shadow: none;
+      /* Mermaid — overrides para que el SVG no herede el estilo del bloque de código */
+      .reveal pre.mermaid,
+      .reveal .mermaid {
+        background: transparent !important;
+        box-shadow: none !important;
         border-radius: 0;
         font-size: 1em;
-        line-height: 1;
+        line-height: 1.2;
         max-height: none;
         width: 100%;
         display: flex;
         justify-content: center;
-        margin: 0.6em 0;
+        align-items: center;
+        margin: 0.4em 0;
+        padding: 0;
       }
 
+      .reveal .mermaid svg,
       .reveal pre.mermaid svg {
         max-width: 100%;
-        max-height: 62vh;
-        height: auto;
+        max-height: 64vh;
+        width: auto !important;
+        height: auto !important;
       }
 
-      .reveal pre.mermaid .edgeLabel {
+      /* Texto dentro del SVG mermaid */
+      .reveal .mermaid .nodeLabel,
+      .reveal .mermaid .edgeLabel {
+        font-family: 'Archivo', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+      }
+      .reveal .mermaid .edgeLabel rect {
+        fill: var(--ss-bg) !important;
+      }
+      .reveal .mermaid .edgeLabel p {
+        background-color: var(--ss-bg) !important;
         color: var(--ss-fg) !important;
-        font-size: 0.85em;
+      }
+      .reveal .mermaid .cluster rect {
+        fill: hsla(47, 64%, 87%, 0.03) !important;
+        stroke: var(--ss-border) !important;
+        stroke-dasharray: 4 3 !important;
+      }
+      .reveal .mermaid .cluster-label .nodeLabel {
+        color: var(--ss-accent) !important;
+        font-weight: 700 !important;
+        font-size: 13px !important;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
 
       .reveal .ascii {
@@ -183,7 +240,7 @@
         font-size: 0.55em;
         line-height: 1.4;
         color: var(--ss-fg);
-        background: #0e0e0e;
+        background: var(--ss-bg-deep);
         padding: 1em 1.4em;
         border-radius: 10px;
         white-space: pre;
@@ -202,7 +259,7 @@
       }
 
       .reveal .card {
-        background: rgba(239, 227, 188, 0.05);
+        background: var(--ss-card);
         border: 1px solid var(--ss-border);
         border-radius: 12px;
         padding: 0.9em 1em;
@@ -210,7 +267,7 @@
 
       .reveal .card h4 {
         margin: 0 0 0.3em 0;
-        color: var(--ss-accent-strong);
+        color: var(--ss-accent);
         font-size: 0.95em;
         font-weight: 700;
       }
@@ -238,16 +295,14 @@
         letter-spacing: 0.1em;
       }
 
-      .reveal .footer-note {
-        position: absolute;
-        bottom: 1.2em;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 0.55em;
+      .reveal .progress {
+        color: var(--ss-accent);
+      }
+
+      .reveal .slide-number {
+        background: rgba(0, 0, 0, 0.4);
+        font-family: 'JetBrains Mono', monospace;
         color: var(--ss-muted);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
       }
 
       .reveal .title-block {
@@ -277,28 +332,10 @@
         letter-spacing: 0.25em;
       }
 
-      .reveal .progress {
-        color: var(--ss-accent);
-      }
-
-      .reveal .slide-number {
-        background: rgba(0, 0, 0, 0.4);
-        font-family: 'JetBrains Mono', monospace;
-        color: var(--ss-muted);
-      }
-
-      html.reveal-full-page,
-      body.reveal-viewport {
-        background:
-          radial-gradient(1200px 600px at 80% -10%, rgba(239, 227, 188, 0.06), transparent 60%),
-          radial-gradient(900px 500px at -10% 110%, rgba(217, 184, 122, 0.07), transparent 55%),
-          var(--ss-bg-deep);
-      }
-
       .reveal .quote {
         font-style: italic;
         color: var(--ss-muted);
-        border-left: 3px solid var(--ss-accent-strong);
+        border-left: 3px solid var(--ss-accent);
         padding-left: 1em;
         margin: 1em 0;
       }
@@ -308,8 +345,10 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <!-- ─────────────────────────────  1. PORTADA  ───────────────────────────── -->
-        <section data-background-gradient="linear-gradient(135deg, #1c1c1c 0%, #2a2620 100%)">
+        <!-- ═══════════════════════════════════════════════════════════════════
+             1 · PORTADA
+             ═══════════════════════════════════════════════════════════════════ -->
+        <section data-background-gradient="linear-gradient(135deg, #2B2B2B 0%, #3a342a 100%)">
           <div class="title-block">
             <p class="brand">Stay-Sidekick</p>
             <p class="sub">
@@ -324,144 +363,158 @@
           </aside>
         </section>
 
-        <!-- ─────────────────────────  2. POR QUÉ STAY-SIDEKICK  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             2 · ORIGEN (stack vertical · ↓ para navegar)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
-          <em class="kicker">Origen</em>
-          <h2>¿Por qué Stay-Sidekick?</h2>
-          <ul>
-            <li class="fragment"><strong>2 años y 5 meses</strong> trabajando de recepcionista en una gestora de pisos turísticos.</li>
-            <li class="fragment">Cada turno arrancaba y terminaba <strong>saltando entre el PMS, Google y Excel</strong>.</li>
-            <li class="fragment">El producto nace de ese diagnóstico: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
-          </ul>
-          <aside class="notes">
-            La idea no es un ejercicio académico, viene de dos años y medio de recepción real. Y lo que
-            detecté es que los PMS resuelven reservas, pero el inicio y el final de jornada se iban en
-            tareas repetitivas entre tres pestañas distintas. De ahí parte el proyecto.
-          </aside>
+          <section>
+            <em class="kicker">Origen <span class="nav-hint">· 1/3 ↓</span></em>
+            <h2>¿Por qué Stay-Sidekick?</h2>
+            <ul>
+              <li class="fragment"><strong>2 años y 5 meses</strong> trabajando de recepcionista en una gestora de pisos turísticos.</li>
+              <li class="fragment">Cada turno arrancaba y terminaba <strong>saltando entre el PMS, Google y Excel</strong>.</li>
+              <li class="fragment">El producto nace de ese diagnóstico: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
+            </ul>
+            <aside class="notes">
+              La idea no es un ejercicio académico, viene de dos años y medio de recepción real. Detecté
+              que el PMS resuelve reservas, pero el inicio y final de jornada se iban entre tres
+              pestañas distintas. De ahí parte el proyecto.
+            </aside>
+          </section>
+
+          <section>
+            <em class="kicker">Origen <span class="nav-hint">· 2/3 ↓</span></em>
+            <h2>Tres iteraciones antes del TFG</h2>
+            <div class="grid-3">
+              <div class="card fragment">
+                <h4>v1 · JavaFX</h4>
+                <p>Prototipo de escritorio.</p>
+                <p>Nunca salió del laboratorio.</p>
+              </div>
+              <div class="card fragment">
+                <h4>v2 · MERN</h4>
+                <p>Mongo + Express + React + Node.</p>
+                <p><strong>Hoy sigue en uso real</strong> en la empresa.</p>
+              </div>
+              <div class="card fragment">
+                <h4>v3 · Stay-Sidekick</h4>
+                <p>Full-stack multi-tenant.</p>
+                <p>Producción en stay-sidekick.com.</p>
+              </div>
+            </div>
+            <aside class="notes">
+              Antes de este TFG hubo dos versiones: un prototipo en JavaFX y una versión MERN que,
+              aunque básica, lleva tiempo usándose en la empresa. Stay-Sidekick es la tercera
+              iteración, ya como sistema serio y multiempresa.
+            </aside>
+          </section>
+
+          <section>
+            <em class="kicker">Origen <span class="nav-hint">· 3/3 →</span></em>
+            <h2>Capa <span class="pill">satélite</span> · no sustituto</h2>
+            <ul>
+              <li class="fragment">Convive con Smoobu, Beds24, KrossBooking…</li>
+              <li class="fragment">Cubre <strong>lo que el PMS no resuelve</strong>: mapa de calor, check-in tardío, vault de comunicaciones, sincronización Google.</li>
+              <li class="fragment">Arquitectura <strong>multi-tenant</strong> real con aislamiento por <code>empresa_id</code>.</li>
+            </ul>
+            <p class="muted">stay-sidekick.com · espejo en stay-sidekick.up.railway.app</p>
+            <aside class="notes">
+              Stay-Sidekick no quiere sustituir al PMS, lo complementa. Cubre el hueco operativo: mapa
+              de calor del día, check-ins tardíos, plantillas de mensajes, sincronización con Google
+              Contacts. Todo aislado por empresa.
+            </aside>
+          </section>
         </section>
 
-        <!-- ─────────────────────────  3. EVOLUCIÓN  ─────────────────── -->
-        <section>
-          <em class="kicker">Trayectoria</em>
-          <h2>Tres iteraciones antes del TFG</h2>
-          <div class="grid-3">
-            <div class="card fragment">
-              <h4>v1 · JavaFX</h4>
-              <p>Prototipo de escritorio.</p>
-              <p>Nunca salió del laboratorio.</p>
-            </div>
-            <div class="card fragment">
-              <h4>v2 · MERN</h4>
-              <p>Mongo + Express + React + Node.</p>
-              <p><strong>Hoy sigue en uso real</strong> en la empresa.</p>
-            </div>
-            <div class="card fragment">
-              <h4>v3 · Stay-Sidekick</h4>
-              <p>Full-stack multi-tenant.</p>
-              <p>Producción en stay-sidekick.com.</p>
-            </div>
-          </div>
-          <aside class="notes">
-            Antes de este TFG hubo dos versiones previas: un prototipo en JavaFX y una versión MERN
-            que, aunque básica, lleva tiempo usándose de verdad en la empresa. Stay-Sidekick es la
-            tercera iteración, ya como sistema serio y multiempresa.
-          </aside>
-        </section>
-
-        <!-- ─────────────────────────  4. CAPA SATÉLITE  ─────────────────── -->
-        <section>
-          <em class="kicker">Posicionamiento</em>
-          <h2>Capa <span class="pill">satélite</span> · no sustituto</h2>
-          <ul>
-            <li class="fragment">Convive con Smoobu, Beds24, KrossBooking…</li>
-            <li class="fragment">Cubre <strong>lo que el PMS no resuelve</strong>: mapa de calor, check-in tardío, vault de comunicaciones, sincronización Google.</li>
-            <li class="fragment">Arquitectura <strong>multi-tenant</strong> real con aislamiento por <code>empresa_id</code>.</li>
-          </ul>
-          <p class="muted">stay-sidekick.com · espejo en stay-sidekick.up.railway.app</p>
-          <aside class="notes">
-            Stay-Sidekick no quiere sustituir al PMS, lo complementa. Se conecta a Smoobu y a otros, y
-            cubre el hueco operativo: mapa de calor del día, check-ins tardíos, plantillas de mensajes,
-            sincronización con Google Contacts. Todo aislado por empresa.
-          </aside>
-        </section>
-
-        <!-- ─────────────────────────  5. STACK  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             3 · STACK (mermaid)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
           <em class="kicker">Stack</em>
           <h2>Una arquitectura, cinco contenedores</h2>
           <pre class="mermaid">
-graph TD
-    Cliente(["Cliente HTTP"])
+%%{init: {'flowchart': {'curve': 'basis', 'nodeSpacing': 38, 'rankSpacing': 50}}}%%
+flowchart LR
+    Cliente(["Cliente HTTP"]):::client
 
     subgraph app_net["app-net · red interna Docker"]
-        Nginx["nginx · Nginx:alpine · :80"]
-        Frontend["frontend · Angular + Nginx · :80"]
-        Web["web · 11ty + Nginx · :80"]
-        Backend["backend · Flask + Gunicorn · :5000"]
-        Postgres[("postgres · PostgreSQL 16 · :5432")]
+        direction TB
+        Nginx["nginx<br/>alpine · :80"]:::edge
+        Backend["backend<br/>Flask + Gunicorn · :5000"]:::svc
+        Frontend["frontend<br/>Angular + nginx · :80"]:::svc
+        Web["web<br/>11ty + nginx · :80"]:::svc
+        Postgres[("postgres<br/>PostgreSQL 16 · :5432")]:::db
     end
 
-    Cliente -->|"HTTP :80 — único puerto expuesto"| Nginx
+    Cliente ==>|"HTTP :80"| Nginx
     Nginx -->|"/api/*"| Backend
     Nginx -->|"/menu/*"| Frontend
     Nginx -->|"/*"| Web
-    Backend -->|"SQL :5432"| Postgres
+    Backend -->|"SQL"| Postgres
+
+    classDef client fill:#212121,stroke:#4F4F4F,color:#DCDCDC,stroke-width:1px;
+    classDef edge   fill:#EFE3BC,stroke:#EFE3BC,color:#5D423A,stroke-width:2px,font-weight:700;
+    classDef svc    fill:#333333,stroke:#4F4F4F,color:#DCDCDC,stroke-width:1px;
+    classDef db     fill:#2B2B2B,stroke:#EFE3BC,color:#DCDCDC,stroke-width:1.5px;
           </pre>
+          <p class="muted" style="text-align:center;margin-top:0.4em">
+            Solo Nginx expone el <strong>:80</strong>. El resto vive dentro de <code>app-net</code>.
+          </p>
           <aside class="notes">
             Esta es la topología de cinco contenedores. El cliente solo ve el puerto 80 del Nginx
             externo, que reparte: barra api al backend Flask, barra menú a Angular, barra raíz al
-            sitio 11ty. Detrás, el backend habla con Postgres. Todo dentro de una red Docker privada.
+            sitio 11ty. Detrás, Postgres. Todo dentro de una red Docker privada.
           </aside>
         </section>
 
-        <!-- ─────────────────────────  6. FRONTEND DUAL  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             4 · FRONTEND (stack vertical de 4)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
-          <em class="kicker">Frontend · 1/3</em>
-          <h2>¿Por qué <span class="pill">Angular + 11ty</span>?</h2>
-          <div class="grid-2">
-            <div class="card fragment">
-              <h4>Angular 21 → <code>/menu</code></h4>
-              <p>Panel privado: estado complejo, formularios densos, guards, signals.</p>
-              <p>Tipado fuerte y arquitectura mantenible a 3 años vista.</p>
+          <section>
+            <em class="kicker">Frontend <span class="nav-hint">· 1/4 ↓</span></em>
+            <h2>¿Por qué <span class="pill">Angular + 11ty</span>?</h2>
+            <div class="grid-2">
+              <div class="card fragment">
+                <h4>Angular 21 → <code>/menu</code></h4>
+                <p>Panel privado: estado complejo, formularios densos, guards, signals.</p>
+                <p>Tipado fuerte y arquitectura mantenible a 3 años vista.</p>
+              </div>
+              <div class="card fragment">
+                <h4>11ty → <code>/</code></h4>
+                <p>Landing, legales, blog, 404. Contenido casi 100% estático.</p>
+                <p>Una SPA aquí sería <em>over-engineering</em>: peor SEO y peor Lighthouse.</p>
+              </div>
             </div>
-            <div class="card fragment">
-              <h4>11ty → <code>/</code></h4>
-              <p>Landing, legales, blog, 404. Contenido casi 100% estático.</p>
-              <p>Una SPA aquí sería <em>over-engineering</em>: peor SEO y peor Lighthouse.</p>
-            </div>
-          </div>
-          <p class="fragment muted">
-            Cada herramienta donde mejor rinde — y se sirven juntas por el mismo Nginx.
-          </p>
-          <aside class="notes">
-            La decisión más visible del frontend es usar dos tecnologías: Angular para lo dinámico,
-            11ty para lo estático. Una SPA para la landing sería matar moscas a cañonazos: SEO peor,
-            Lighthouse peor, complejidad gratuita. Cada herramienta donde brilla.
-          </aside>
-        </section>
+            <p class="fragment muted" style="margin-top:0.6em">
+              Cada herramienta donde mejor rinde — y se sirven juntas por el mismo Nginx.
+            </p>
+            <aside class="notes">
+              La decisión más visible del frontend es usar dos tecnologías: Angular para lo dinámico,
+              11ty para lo estático. Una SPA para la landing sería matar moscas a cañonazos. Cada
+              herramienta donde brilla.
+            </aside>
+          </section>
 
-        <!-- ─────────────────────────  7. SCSS COMPARTIDO  ─────────────────── -->
-        <section>
-          <em class="kicker">Frontend · 2/3</em>
-          <h2>SCSS compartido entre Angular y 11ty</h2>
-          <ul>
-            <li class="fragment">Ambos compilan desde <code>frontend/src/styles/</code>.</li>
-            <li class="fragment">Arquitectura <strong>ITCSS</strong> (settings → tools → generic → elements → layout → components → utilities).</li>
-            <li class="fragment">Nomenclatura <strong>BEM</strong> — sin colisiones, sin duplicados.</li>
-            <li class="fragment">Una sola fuente de verdad cromática para ambos frontends.</li>
-          </ul>
-          <aside class="notes">
-            Como Angular y 11ty comparten estilos, no hay dos sistemas: hay uno solo. ITCSS marca el
-            orden de las capas, BEM marca cómo se nombran los componentes. Mismo CSS para el panel y
-            para la landing — coherencia gratuita.
-          </aside>
-        </section>
+          <section>
+            <em class="kicker">Frontend <span class="nav-hint">· 2/4 ↓</span></em>
+            <h2>SCSS compartido entre Angular y 11ty</h2>
+            <ul>
+              <li class="fragment">Ambos compilan desde <code>frontend/src/styles/</code>.</li>
+              <li class="fragment">Arquitectura <strong>ITCSS</strong> — settings → tools → generic → elements → layout → components → utilities.</li>
+              <li class="fragment">Nomenclatura <strong>BEM</strong> — sin colisiones, sin duplicados.</li>
+              <li class="fragment">Una sola fuente de verdad cromática para ambos frontends.</li>
+            </ul>
+            <aside class="notes">
+              Como Angular y 11ty comparten estilos, no hay dos sistemas: hay uno solo. ITCSS marca el
+              orden de las capas, BEM marca cómo se nombran los componentes. Coherencia gratuita.
+            </aside>
+          </section>
 
-        <!-- ─────────────────────────  8. THEME SWITCH 1  ─────────────────── -->
-        <section>
-          <em class="kicker">Frontend · 3/3 · Detalle técnico</em>
-          <h2>El theme switch como signal</h2>
-          <pre><code class="language-typescript" data-trim data-noescape>
+          <section>
+            <em class="kicker">Frontend <span class="nav-hint">· 3/4 ↓</span></em>
+            <h2>El theme switch como signal</h2>
+            <pre><code class="language-typescript" data-trim data-noescape>
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   readonly theme = signal&lt;Theme&gt;(this._resolveInitial());
@@ -476,20 +529,19 @@ export class ThemeService {
     root.setAttribute('data-theme', theme);
   }
 }
-          </code></pre>
-          <p class="muted">Una sola clase <code>.dark</code> en <code>&lt;html&gt;</code> reescribe toda la UI vía CSS custom properties.</p>
-          <aside class="notes">
-            El cambio de tema usa signals de Angular y toca una sola clase en el html. Como toda la
-            paleta vive en custom properties, basta con esa clase para repintar el panel entero en
-            una transición. Sin recargas, sin recompilar nada.
-          </aside>
-        </section>
+            </code></pre>
+            <p class="muted">Una sola clase <code>.dark</code> en <code>&lt;html&gt;</code> reescribe toda la UI vía CSS custom properties.</p>
+            <aside class="notes">
+              El cambio de tema usa signals de Angular y toca una sola clase en el html. Como toda la
+              paleta vive en custom properties, basta esa clase para repintar el panel entero en una
+              transición. Sin recargas.
+            </aside>
+          </section>
 
-        <!-- ─────────────────────────  9. THEME SWITCH 2  ─────────────────── -->
-        <section>
-          <em class="kicker">Frontend · curiosidad</em>
-          <h2>Y se sincroniza entre Angular y 11ty</h2>
-          <pre><code class="language-typescript" data-trim data-noescape>
+          <section>
+            <em class="kicker">Frontend <span class="nav-hint">· 4/4 →</span></em>
+            <h2>Y se sincroniza entre Angular y 11ty</h2>
+            <pre><code class="language-typescript" data-trim data-noescape>
 // El evento 'storage' SOLO se dispara en otras pestañas,
 // nunca en la que hizo el setItem — exactamente lo que necesitamos
 // para que la app espejo se entere del cambio sin entrar en bucle.
@@ -501,88 +553,94 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
     this._apply(next);
   }
 });
-          </code></pre>
-          <p class="fragment muted">
-            Si cambio el tema en el panel Angular y tengo la landing 11ty abierta en otra pestaña, también vira. Mismo origen, mismo <code>localStorage</code>.
-          </p>
-          <aside class="notes">
-            Lo bonito: si cambio el tema en el panel y tengo la landing abierta en otra pestaña, la
-            landing también cambia. El evento storage se dispara solo en las pestañas distintas a la
-            que escribió, así que no hay bucle. Misma marca, misma percepción.
-          </aside>
+            </code></pre>
+            <p class="fragment muted">
+              Cambio el tema en el panel Angular con la landing 11ty abierta en otra pestaña → también vira. Mismo origen, mismo <code>localStorage</code>.
+            </p>
+            <aside class="notes">
+              Lo bonito: si cambio el tema en el panel y tengo la landing abierta en otra pestaña, la
+              landing también cambia. El evento storage se dispara solo en pestañas distintas a la que
+              escribió, así que no hay bucle.
+            </aside>
+          </section>
         </section>
 
-        <!-- ─────────────────────────  10. DISEÑO UI SISTEMA  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             5 · DISEÑO UI (stack vertical de 2)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
-          <em class="kicker">Diseño UI · 1/2</em>
-          <h2>Sistema acromático + acento ámbar</h2>
-          <div class="grid-2">
-            <div>
-              <ul>
-                <li class="fragment">Escala de grises HSL de 9 pasos.</li>
-                <li class="fragment">Un único acento cálido <code>#EFE3BC</code>.</li>
-                <li class="fragment">Decisión basada en la <em>Ley de Hick</em>: menos color = menos carga cognitiva para paneles densos.</li>
-                <li class="fragment">Tipografía única: <strong>Archivo</strong> variable, pesos 400-800.</li>
-              </ul>
+          <section>
+            <em class="kicker">Diseño UI <span class="nav-hint">· 1/2 ↓</span></em>
+            <h2>Sistema acromático + acento ámbar</h2>
+            <div class="grid-2">
+              <div>
+                <ul>
+                  <li class="fragment">Escala de grises HSL de 9 pasos.</li>
+                  <li class="fragment">Un único acento cálido <code>#EFE3BC</code>.</li>
+                  <li class="fragment"><em>Ley de Hick</em>: menos color, menos carga cognitiva en paneles densos.</li>
+                  <li class="fragment">Tipografía única: <strong>Archivo</strong> variable, pesos 400-800.</li>
+                </ul>
+              </div>
+              <div class="card fragment">
+                <h4>Tokens semánticos</h4>
+                <p><code>--background</code> · <code>--foreground</code></p>
+                <p><code>--card</code> · <code>--primary</code></p>
+                <p><code>--border</code> · <code>--accent</code></p>
+                <p class="muted">El toggle <code>.dark</code> reescribe los tokens; los componentes no se enteran.</p>
+              </div>
             </div>
-            <div class="card fragment">
-              <h4>Tokens semánticos</h4>
-              <p><code>--background</code> · <code>--foreground</code></p>
-              <p><code>--card</code> · <code>--primary</code></p>
-              <p><code>--border</code> · <code>--accent</code></p>
-              <p class="muted">El toggle <code>.dark</code> reescribe los tokens; los componentes no se enteran.</p>
+            <aside class="notes">
+              Paleta acromática a propósito: grises y un solo acento ámbar. En paneles que se miran
+              ocho horas, menos color es mejor. Tipografía única, Archivo variable. Sistema, no
+              decoración.
+            </aside>
+          </section>
+
+          <section>
+            <em class="kicker">Diseño UI <span class="nav-hint">· 2/2 →</span></em>
+            <h2>Accesibilidad medida, no declarada</h2>
+            <div class="grid-3">
+              <div class="stat"><div class="n">AA</div><div class="l">WCAG 2.1</div></div>
+              <div class="stat"><div class="n">9</div><div class="l">pantallas auditadas WAVE</div></div>
+              <div class="stat"><div class="n">4 px</div><div class="l">cuadrícula base</div></div>
             </div>
-          </div>
-          <aside class="notes">
-            La paleta es acromática a propósito: escala de grises y un solo acento ámbar. En paneles
-            que se miran ocho horas, menos color es mejor. La tipografía es Archivo variable, una sola
-            familia, cinco grupos de tamaño y cuatro pesos. Sistema, no decoración.
-          </aside>
+            <ul style="margin-top: 1em">
+              <li class="fragment">Auditoría <strong>WAVE</strong> + <strong>Lighthouse</strong> publicada en la memoria técnica.</li>
+              <li class="fragment">Confirmaciones en acciones destructivas (prevención de errores).</li>
+              <li class="fragment">Feedback explícito: spinners, toasts accionables, estados vacíos.</li>
+            </ul>
+            <aside class="notes">
+              Accesibilidad como dato, no como adjetivo. WCAG 2.1 AA y auditorías WAVE y Lighthouse en
+              cada pantalla principal. Confirmación en acciones destructivas, feedback explícito en
+              cada operación.
+            </aside>
+          </section>
         </section>
 
-        <!-- ─────────────────────────  11. DISEÑO UI ACCESIBILIDAD  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             6 · BACKEND (stack vertical de 3)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
-          <em class="kicker">Diseño UI · 2/2</em>
-          <h2>Accesibilidad medida, no declarada</h2>
-          <div class="grid-3">
-            <div class="stat"><div class="n">AA</div><div class="l">WCAG 2.1</div></div>
-            <div class="stat"><div class="n">9</div><div class="l">pantallas auditadas WAVE</div></div>
-            <div class="stat"><div class="n">4 px</div><div class="l">cuadrícula base</div></div>
-          </div>
-          <ul style="margin-top: 1em">
-            <li class="fragment">Auditoría <strong>WAVE</strong> + <strong>Lighthouse</strong> publicada en la memoria técnica.</li>
-            <li class="fragment">Confirmaciones en acciones destructivas (Ley de Postel + prevención de errores).</li>
-            <li class="fragment">Feedback explícito: spinners, toasts accionables, estados vacíos.</li>
-          </ul>
-          <aside class="notes">
-            Accesibilidad no como adjetivo, como dato. WCAG 2.1 AA como objetivo y auditorías WAVE y
-            Lighthouse en cada pantalla principal. Confirmación en acciones destructivas, feedback
-            explícito en cada operación. Todo documentado.
-          </aside>
-        </section>
+          <section>
+            <em class="kicker">Backend <span class="nav-hint">· 1/3 ↓</span></em>
+            <h2>Flask · blueprints · multi-tenant</h2>
+            <ul>
+              <li class="fragment">Flask + Gunicorn, <strong>blueprints modulares</strong> (auth, perfil, vault, heatmap, apartamentos…).</li>
+              <li class="fragment">¿Por qué Flask? <em>Microframework</em>: control fino sobre middlewares, sin magia.</li>
+              <li class="fragment">JWT HS256 + CSRF double-submit + rate limit + CORS por orígenes.</li>
+              <li class="fragment">Aislamiento por <code>empresa_id</code> en <strong>todas</strong> las queries.</li>
+            </ul>
+            <aside class="notes">
+              El backend es Flask. Microframework para tener control fino: yo decido qué middleware
+              entra. Cada herramienta operativa es un blueprint independiente, y todas las consultas
+              llevan empresa_id porque el sistema es multi-tenant de verdad.
+            </aside>
+          </section>
 
-        <!-- ─────────────────────────  12. BACKEND FLASK  ─────────────────── -->
-        <section>
-          <em class="kicker">Backend · 1/3</em>
-          <h2>Flask · blueprints · multi-tenant</h2>
-          <ul>
-            <li class="fragment">Flask + Gunicorn, <strong>blueprints modulares</strong> (auth, perfil, vault, heatmap, apartamentos…).</li>
-            <li class="fragment">¿Por qué Flask? <em>Microframework</em>: control fino sobre middlewares, sin magia.</li>
-            <li class="fragment">JWT HS256 + CSRF double-submit + rate limit + CORS por orígenes.</li>
-            <li class="fragment">Aislamiento por <code>empresa_id</code> en <strong>todas</strong> las queries.</li>
-          </ul>
-          <aside class="notes">
-            El backend es Flask. Microframework para tener control fino: yo decido qué middleware
-            entra. Cada herramienta operativa es un blueprint independiente, y todas las consultas
-            llevan empresa_id porque el sistema es multi-tenant de verdad.
-          </aside>
-        </section>
-
-        <!-- ─────────────────────────  13. DTO PATTERN  ─────────────────── -->
-        <section>
-          <em class="kicker">Backend · 2/3 · "patrón DTO"</em>
-          <h2>Marshmallow como frontera contractual</h2>
-          <pre><code class="language-python" data-trim data-noescape>
+          <section>
+            <em class="kicker">Backend <span class="nav-hint">· 2/3 ↓</span></em>
+            <h2>Marshmallow como frontera contractual</h2>
+            <pre><code class="language-python" data-trim data-noescape>
 class ApartamentoCreateSchema(Schema):
     nombre    = fields.String(required=True, validate=validate.Length(min=1, max=200))
     direccion = fields.String(load_default=None, validate=validate.Length(max=300))
@@ -595,73 +653,74 @@ class ApartamentoCreateSchema(Schema):
             if field in data and isinstance(data[field], str):
                 data[field] = nh3.clean(data[field], tags=set()).strip()
         return data
-          </code></pre>
-          <p class="fragment muted">
-            <strong>Sanitiza primero, valida después.</strong> El blueprint nunca toca un dict crudo del cliente.
-          </p>
-          <aside class="notes">
-            No se llama DTO en el código, pero cumple ese rol: cada endpoint tiene su schema de
-            Marshmallow que sanitiza primero con nh3 y valida después. El blueprint nunca recibe un
-            dict crudo de Flask, recibe un objeto ya limpio. Frontera contractual entre HTTP y negocio.
-          </aside>
+            </code></pre>
+            <p class="fragment muted">
+              <strong>Sanitiza primero, valida después.</strong> El blueprint nunca toca un dict crudo del cliente.
+            </p>
+            <aside class="notes">
+              No se llama DTO en el código, pero cumple ese rol: cada endpoint tiene su schema de
+              Marshmallow que sanitiza primero con nh3 y valida después. El blueprint nunca recibe un
+              dict crudo de Flask. Frontera contractual entre HTTP y negocio.
+            </aside>
+          </section>
+
+          <section>
+            <em class="kicker">Backend <span class="nav-hint">· 3/3 →</span></em>
+            <h2>Datos de huéspedes: <span class="pill">jamás</span> en BD</h2>
+            <div class="grid-2">
+              <div class="card fragment">
+                <h4>Cifrado simétrico Fernet</h4>
+                <p>Las <strong>API keys</strong> del PMS y del proveedor de IA viven en BD <em>cifradas</em> con clave maestra.</p>
+                <p class="muted"><code>FERNET_KEY</code> fuera del repo, en el entorno.</p>
+              </div>
+              <div class="card fragment">
+                <h4>Huéspedes en memoria</h4>
+                <p>El mapa de calor y la sincronización Google trabajan con datos <strong>en RAM</strong>.</p>
+                <p>Cuando termina la petición, <strong>se evaporan</strong>. Cero PII persistida.</p>
+              </div>
+            </div>
+            <p class="fragment muted" style="margin-top:0.5em">RGPD no como póster en la pared — como decisión arquitectónica.</p>
+            <aside class="notes">
+              Y la decisión más curiosa del backend: los datos de huéspedes nunca tocan la base de
+              datos. Se procesan en memoria y se evaporan. RGPD por diseño. Y lo poco sensible que
+              persiste, como las API keys, va cifrado con Fernet.
+            </aside>
+          </section>
         </section>
 
-        <!-- ─────────────────────────  14. CURIOSIDAD BACKEND  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             7 · DEVOPS (stack vertical de 3)
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
-          <em class="kicker">Backend · 3/3 · Curiosidad</em>
-          <h2>Datos de huéspedes: <span class="pill">jamás</span> en BD</h2>
-          <div class="grid-2">
-            <div class="card fragment">
-              <h4>Cifrado simétrico Fernet</h4>
-              <p>Las <strong>API keys</strong> del PMS y del proveedor de IA viven en BD <em>cifradas</em> con clave maestra.</p>
-              <p class="muted"><code>FERNET_KEY</code> fuera del repo, en el entorno.</p>
+          <section>
+            <em class="kicker">DevOps <span class="nav-hint">· 1/3 ↓</span></em>
+            <h2>En realidad hay <span class="pill">dos</span> Nginx</h2>
+            <div class="grid-2">
+              <div class="card fragment">
+                <h4>Nginx externo · <code>./nginx</code></h4>
+                <p>Reverse proxy. Decide qué prefijo va a qué contenedor.</p>
+                <p>Aplica <strong>cabeceras de seguridad</strong> globales (CSP, HSTS, X-Frame-Options).</p>
+              </div>
+              <div class="card fragment">
+                <h4>Nginx interno · en cada contenedor estático</h4>
+                <p>Sirve el <code>dist/</code> de Angular y el <code>_site/</code> de 11ty.</p>
+                <p>Resuelve el SPA-fallback y los <em>trailing slashes</em> de 11ty.</p>
+              </div>
             </div>
-            <div class="card fragment">
-              <h4>Huéspedes en memoria</h4>
-              <p>El mapa de calor y la sincronización Google trabajan con datos <strong>en RAM</strong>.</p>
-              <p>Cuando termina la petición, <strong>se evaporan</strong>. Cero PII persistida.</p>
-            </div>
-          </div>
-          <p class="fragment muted">RGPD no como póster en la pared — como decisión arquitectónica.</p>
-          <aside class="notes">
-            Y la decisión más curiosa del backend: los datos de huéspedes nunca tocan la base de datos.
-            Se procesan en memoria, se sirve la respuesta, se evaporan. RGPD por diseño, no por
-            documento. Y lo poco sensible que persiste, como las API keys, va cifrado con Fernet.
-          </aside>
-        </section>
+            <p class="fragment muted" style="margin-top:0.5em">
+              Externo reparte tráfico. Internos sirven archivos. Roles diferenciados, mismo binario.
+            </p>
+            <aside class="notes">
+              Algo que la gente suele pasar por alto: hay dos Nginx. Uno externo, reverse proxy, que
+              aplica las cabeceras de seguridad. Y otro interno dentro de los contenedores estáticos,
+              sirviendo el dist y resolviendo el SPA fallback.
+            </aside>
+          </section>
 
-
-        <!-- ─────────────────────────  16. LOS DOS NGINX  ─────────────────── -->
-        <section>
-          <em class="kicker">DevOps · 1/3 · El detalle que no se ve</em>
-          <h2>En realidad hay <span class="pill">dos</span> Nginx</h2>
-          <div class="grid-2">
-            <div class="card fragment">
-              <h4>Nginx externo · <code>./nginx</code></h4>
-              <p>Reverse proxy. Decide qué prefijo va a qué contenedor.</p>
-              <p>Aplica <strong>cabeceras de seguridad</strong> globales (CSP, HSTS, X-Frame-Options).</p>
-            </div>
-            <div class="card fragment">
-              <h4>Nginx interno · en cada contenedor estático</h4>
-              <p>Sirve el <code>dist/</code> de Angular y el <code>_site/</code> de 11ty.</p>
-              <p>Resuelve el SPA-fallback de Angular y los <em>trailing slashes</em> de 11ty.</p>
-            </div>
-          </div>
-          <p class="fragment muted">
-            Externo reparte tráfico. Internos sirven archivos. Roles diferenciados, mismo binario.
-          </p>
-          <aside class="notes">
-            Algo que la gente suele pasar por alto: hay dos Nginx. Uno externo que es el reverse proxy
-            y aplica las cabeceras de seguridad. Y otro interno dentro de los contenedores estáticos,
-            sirviendo el dist y resolviendo el SPA fallback. Mismo binario, dos responsabilidades.
-          </aside>
-        </section>
-
-        <!-- ─────────────────────────  17. CSP HASHES  ─────────────────── -->
-        <section>
-          <em class="kicker">DevOps · 2/3 · Caso real de debugging</em>
-          <h2>CSP estricta vs. scripts del 11ty</h2>
-          <pre><code class="language-nginx" data-trim data-noescape>
+          <section>
+            <em class="kicker">DevOps <span class="nav-hint">· 2/3 ↓</span></em>
+            <h2>CSP estricta vs. scripts del 11ty</h2>
+            <pre><code class="language-nginx" data-trim data-noescape>
 add_header Content-Security-Policy "
   default-src 'self';
   script-src 'self' https://challenges.cloudflare.com
@@ -671,24 +730,23 @@ add_header Content-Security-Policy "
   ...
   object-src 'none'; base-uri 'self'; form-action 'self';
 " always;
-          </code></pre>
-          <ul>
-            <li class="fragment">El 11ty inyecta <strong>scripts inline</strong> mínimos (toggle de tema, anti-FOUC).</li>
-            <li class="fragment">Opción A — <code>'unsafe-inline'</code>. Rechazada: rompe el modelo de amenaza.</li>
-            <li class="fragment">Opción B — <strong>hashear cada script</strong> y declararlo en la CSP. <em>Hecho</em>.</li>
-          </ul>
-          <aside class="notes">
-            La CSP estricta y el 11ty chocaron de frente. El 11ty inyecta dos scripts inline para el
-            tema y para evitar el flash de contenido. Podía abrir la puerta con unsafe-inline, pero
-            eso rompe la CSP. La solución: hashear los scripts en sha256 y meterlos en la policy.
-          </aside>
-        </section>
+            </code></pre>
+            <ul>
+              <li class="fragment">El 11ty inyecta <strong>scripts inline</strong> mínimos (toggle de tema, anti-FOUC).</li>
+              <li class="fragment">Opción A — <code>'unsafe-inline'</code>. Rechazada: rompe el modelo de amenaza.</li>
+              <li class="fragment">Opción B — <strong>hashear cada script</strong> y declararlo en la CSP. <em>Hecho</em>.</li>
+            </ul>
+            <aside class="notes">
+              La CSP estricta y el 11ty chocaron de frente. El 11ty inyecta dos scripts inline para el
+              tema y para evitar el flash de contenido. Podía abrir con unsafe-inline, pero eso rompe
+              la CSP. Solución: hashear los scripts en sha256 y meterlos en la policy.
+            </aside>
+          </section>
 
-        <!-- ─────────────────────────  18. RAILWAY  ─────────────────── -->
-        <section>
-          <em class="kicker">DevOps · 3/3</em>
-          <h2>Railway · DNS interno que cambia cada deploy</h2>
-          <pre><code class="language-nginx" data-trim data-noescape>
+          <section>
+            <em class="kicker">DevOps <span class="nav-hint">· 3/3 →</span></em>
+            <h2>Railway · DNS interno que cambia cada deploy</h2>
+            <pre><code class="language-nginx" data-trim data-noescape>
 # DNS resolver interno de Railway — TTL 1s
 # evita IPs caducadas tras redeploys
 resolver [fd12::10] ipv6=on valid=1s;
@@ -699,18 +757,21 @@ location /api/ {
     proxy_pass $backend_url;   # variable -> re-resolución por petición
     ...
 }
-          </code></pre>
-          <p class="fragment muted">
-            TLS lo termina Railway en el edge — Nginx solo escucha en <code>:80</code> dentro de la red privada IPv6.
-          </p>
-          <aside class="notes">
-            En Railway hay otro reto: cada redeploy cambia las IPs internas. Si Nginx las cachea, todo
-            cae. La solución es el resolver IPv6 con TTL de un segundo y usar variables en proxy_pass
-            para forzar la re-resolución por petición. TLS lo termina Railway, nosotros vamos en HTTP.
-          </aside>
+            </code></pre>
+            <p class="fragment muted">
+              TLS lo termina Railway en el edge — Nginx solo escucha en <code>:80</code> dentro de la red privada IPv6.
+            </p>
+            <aside class="notes">
+              En Railway, cada redeploy cambia las IPs internas. Si Nginx las cachea, todo cae. La
+              solución es el resolver IPv6 con TTL de un segundo y usar variables en proxy_pass para
+              forzar la re-resolución por petición. TLS lo termina Railway, nosotros vamos en HTTP.
+            </aside>
+          </section>
         </section>
 
-        <!-- ─────────────────────────  19. CALIDAD  ─────────────────── -->
+        <!-- ═══════════════════════════════════════════════════════════════════
+             8 · CALIDAD
+             ═══════════════════════════════════════════════════════════════════ -->
         <section>
           <em class="kicker">Calidad</em>
           <h2>Tests + CI/CD como red de seguridad</h2>
@@ -725,26 +786,30 @@ location /api/ {
           </ul>
           <aside class="notes">
             Para cerrar la parte técnica: la red de seguridad. Casi cuatrocientos tests entre backend
-            y frontend, cobertura mínima del noventa por ciento como gate del CI, y seis workflows en
-            Actions que solo publican imagen si todo está verde. Más Trivy escaneando cada semana.
+            y frontend, cobertura mínima del noventa por ciento como gate del CI, seis workflows en
+            Actions que solo publican imagen si todo está verde. Más Trivy semanal.
           </aside>
         </section>
 
-        <!-- ─────────────────────────  20. CIERRE  ─────────────────── -->
-        <section data-background-gradient="linear-gradient(135deg, #2a2620 0%, #1c1c1c 100%)">
-          <div class="title-block">
-            <h2 style="font-size: 2em">Gracias.</h2>
-            <p class="lead">
-              Una herramienta nacida de dos años y medio<br />
-              detrás de un mostrador.
-            </p>
-            <p class="meta" style="margin-top: 2em">
-              stay-sidekick.com · github.com/sdurutr436/stay-sidekick
-            </p>
-          </div>
+        <!-- ═══════════════════════════════════════════════════════════════════
+             9 · TRANSICIÓN A DEMO TÉCNICA
+             ═══════════════════════════════════════════════════════════════════ -->
+        <section data-background-gradient="linear-gradient(135deg, #3a342a 0%, #2B2B2B 100%)">
+          <em class="kicker">Y ahora…</em>
+          <h2 style="font-size: 2.2em">Pasamos a la <span class="pill">demo técnica</span></h2>
+          <ul style="margin-top: 1em">
+            <li class="fragment">Login y dashboard multi-empresa del panel.</li>
+            <li class="fragment">Theme switch sincronizándose entre pestañas en vivo.</li>
+            <li class="fragment">Mapa de calor operativo desde XLSX.</li>
+            <li class="fragment">Vault de comunicaciones con asistente IA.</li>
+          </ul>
+          <p class="muted" style="margin-top: 1.6em; text-align:center; font-size:0.95em">
+            <strong>stay-sidekick.com</strong> · el panel real, en producción.
+          </p>
           <aside class="notes">
-            Resumen en una línea: una herramienta nacida de dos años y medio detrás de un mostrador,
-            con stack moderno, seguridad por capas y decisiones documentadas. Gracias.
+            Hasta aquí la parte conceptual. A partir de este punto pasamos a la demo técnica en vivo
+            sobre stay-sidekick.com: login, theme switch entre pestañas, mapa de calor y vault con IA.
+            Gracias.
           </aside>
         </section>
       </div>
@@ -756,25 +821,44 @@ location /api/ {
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs';
 
+      // Paleta corporativa Stay-Sidekick — dark mode + acento ámbar fijo
       mermaid.initialize({
         startOnLoad: false,
         theme: 'base',
         securityLevel: 'loose',
+        fontFamily: 'Archivo, sans-serif',
         themeVariables: {
           fontFamily: 'Archivo, sans-serif',
+          fontSize: '14px',
           background: 'transparent',
-          primaryColor: '#2a2620',
-          primaryTextColor: '#efe3bc',
-          primaryBorderColor: '#d9b87a',
-          secondaryColor: '#1c1c1c',
-          tertiaryColor: '#141414',
-          lineColor: '#d9b87a',
-          edgeLabelBackground: '#1c1c1c',
-          clusterBkg: 'rgba(239, 227, 188, 0.04)',
-          clusterBorder: 'rgba(239, 227, 188, 0.3)',
-          textColor: '#e8e2d4',
+
+          primaryColor: '#EFE3BC',          // acento ámbar (nodo destacado)
+          primaryTextColor: '#5D423A',      // texto sobre acento
+          primaryBorderColor: '#EFE3BC',
+
+          secondaryColor: '#333333',        // card dark
+          secondaryTextColor: '#DCDCDC',
+          secondaryBorderColor: '#4F4F4F',
+
+          tertiaryColor: '#212121',         // sidebar dark
+          tertiaryTextColor: '#DCDCDC',
+          tertiaryBorderColor: '#4F4F4F',
+
+          mainBkg: '#333333',
+          nodeBorder: '#4F4F4F',
+          clusterBkg: 'rgba(239, 227, 188, 0.03)',
+          clusterBorder: '#4F4F4F',
+
+          lineColor: '#EFE3BC',
+          textColor: '#DCDCDC',
+          edgeLabelBackground: '#2B2B2B',
         },
-        flowchart: { curve: 'basis', padding: 14 },
+        flowchart: {
+          curve: 'basis',
+          useMaxWidth: true,
+          htmlLabels: true,
+          padding: 12,
+        },
       });
 
       Reveal.initialize({
@@ -791,7 +875,11 @@ location /api/ {
 
       const renderMermaid = async () => {
         const pending = document.querySelectorAll('pre.mermaid:not([data-processed])');
-        if (pending.length) await mermaid.run({ nodes: pending });
+        if (pending.length) {
+          await mermaid.run({ nodes: pending });
+          // Forzar a reveal a recalcular el tamaño tras meter el SVG
+          if (window.Reveal) Reveal.layout();
+        }
       };
 
       Reveal.on('ready', renderMermaid);

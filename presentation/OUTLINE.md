@@ -1,28 +1,38 @@
 # Outline — Presentación TFG Stay-Sidekick
 
-Duración objetivo: **5 min** · Ritmo: ~15-18 s por slide · Total palabras habladas ≈ 700.
-Cobertura obligatoria: (1) Origen, (2) Frontend, (3) Diseño UI, (4) Backend, (5) DevOps.
+Duración objetivo: **5 min** · Ritmo: ~15-18 s por slide · Speaker notes ≈ 700 palabras.
+Cobertura obligatoria: (1) Origen, (2) Frontend, (3) Diseño UI, (4) Backend, (5) DevOps + transición a demo.
 
-| # | Slide | Contenido clave | Pilar | Tiempo |
-|---|-------|-----------------|-------|--------|
-| 1 | Portada | Stay-Sidekick · TFG DAW · Sergio Durán | — | 10 s |
-| 2 | ¿Por qué Stay-Sidekick? | 2 a 5 m de recepcionista · fricción diaria PMS+Excel+Google | 1 | 25 s |
-| 3 | Evolución del proyecto | JavaFX → MERN (en producción real) → Stay-Sidekick | 1 | 20 s |
-| 4 | Capa satélite | NO sustituye al PMS · multi-tenant · stay-sidekick.com | 1 | 15 s |
-| 5 | Stack en una pantalla | Diagrama mermaid de los 5 contenedores · misma topología que el README | — | 20 s |
-| 6 | Frontend dual: por qué Angular + 11ty | SPA privada vs. landing estática · cada herramienta a lo suyo | 2 | 25 s |
-| 7 | SCSS compartido | ITCSS + BEM, una fuente de verdad entre Angular y 11ty | 2 | 15 s |
-| 8 | El theme switch (1/2) | Signal Angular · clase `.dark` + `data-theme` | 2 | 20 s |
-| 9 | El theme switch (2/2) | Sincronización Angular ↔ 11ty vía evento `storage` | 2 | 20 s |
-| 10 | Diseño UI — sistema acromático | gris + acento ámbar · paneles densos · Archivo variable | 3 | 20 s |
-| 11 | Diseño UI — accesibilidad | WCAG 2.1 AA · WAVE + Lighthouse · grid 4 px | 3 | 15 s |
-| 12 | Backend Flask | blueprints modulares · multi-tenant por `empresa_id` | 4 | 20 s |
-| 13 | El "patrón DTO" en Flask | Marshmallow Schemas con `@pre_load` · sanitiza ANTES de validar | 4 | 25 s |
-| 14 | Curiosidad backend | API keys cifradas Fernet · huéspedes NUNCA persisten (RGPD) | 4 | 20 s |
-| 15 | DevOps — los dos Nginx | proxy externo + nginx interno en cada contenedor estático | 5 | 25 s |
-| 16 | DevOps — CSP estricta con 11ty | hashes `sha256-...` de scripts inline · debugging real | 5 | 25 s |
-| 17 | DevOps — Railway | resolver IPv6 TTL 1 s · TLS en el edge | 5 | 15 s |
-| 18 | Calidad | 92 tests pytest · 297 tests Vitest · cobertura ≥90 % · CI 6 workflows | — | 15 s |
-| 19 | Cierre | Recap + gracias + URL pública | — | 10 s |
+## Estructura — navegación 2D
 
-Total: **5 min** clavados. La topología Docker se introduce ya en el slide 5 (mermaid), por lo que el bloque de DevOps no necesita un slide de arquitectura aparte.
+Los **pilares** son stacks verticales: la flecha derecha (`→`) avanza al siguiente pilar; la flecha abajo (`↓`) recorre las sub-diapositivas del pilar actual. El kicker de cada slide indica su posición (`Frontend · 2/4 ↓`).
+
+| # | Pilar / Slide | Navegación | Contenido clave | Tiempo |
+|---|---------------|:----------:|-----------------|:------:|
+| 1 | Portada | — | Stay-Sidekick · TFG DAW · Sergio Durán | 10 s |
+| 2 | **Origen** 1/3 | ↓ | 2 a 5 m de recepcionista · fricción diaria | 25 s |
+| 3 | Origen 2/3 | ↓ | JavaFX → MERN (en producción real) → Stay-Sidekick | 20 s |
+| 4 | Origen 3/3 | → | Capa satélite · NO sustituye al PMS · multi-tenant | 15 s |
+| 5 | Stack | → | **Diagrama mermaid** de los 5 contenedores (mismo del README) | 20 s |
+| 6 | **Frontend** 1/4 | ↓ | Angular para `/menu` · 11ty para `/` · justificación | 25 s |
+| 7 | Frontend 2/4 | ↓ | SCSS compartido · ITCSS + BEM | 15 s |
+| 8 | Frontend 3/4 | ↓ | Theme switch · signal Angular + clase `.dark` | 20 s |
+| 9 | Frontend 4/4 | → | Sincronización Angular ↔ 11ty vía evento `storage` | 20 s |
+| 10 | **Diseño UI** 1/2 | ↓ | Sistema acromático + acento ámbar · Archivo variable | 20 s |
+| 11 | Diseño UI 2/2 | → | WCAG 2.1 AA · WAVE + Lighthouse · grid 4 px | 15 s |
+| 12 | **Backend** 1/3 | ↓ | Flask blueprints · multi-tenant por `empresa_id` | 20 s |
+| 13 | Backend 2/3 | ↓ | "DTO" con Marshmallow + `@pre_load` (sanitiza antes de validar) | 25 s |
+| 14 | Backend 3/3 | → | Huéspedes en memoria · Fernet para API keys · RGPD by design | 20 s |
+| 15 | **DevOps** 1/3 | ↓ | Los **dos** Nginx: proxy externo + nginx interno por contenedor | 25 s |
+| 16 | DevOps 2/3 | ↓ | CSP estricta con hashes `sha256-...` para scripts inline del 11ty | 25 s |
+| 17 | DevOps 3/3 | → | Railway: resolver IPv6 TTL 1 s · TLS en el edge | 15 s |
+| 18 | Calidad | → | 92 tests pytest · 297 tests Vitest · ≥90 % cobertura · 6 workflows | 15 s |
+| 19 | **Pasamos a la demo técnica** | — | Login · theme switch en vivo · mapa de calor · vault IA | 15 s |
+
+Total: **5 min** clavados.
+
+## Notas
+
+- **Paleta**: importada literalmente de `frontend/src/styles/settings/_css-variables.scss` (modo oscuro · `#2B2B2B` / `#333333` / `#212121` / borde `#4F4F4F` / acento ámbar fijo `#EFE3BC` con foreground `#5D423A`).
+- **Mermaid**: temizado para usar el mismo acento ámbar como nodo destacado (Nginx, el "hub").
+- El slide 19 marca explícitamente la transición a la **demo técnica en vivo** sobre stay-sidekick.com; no se cierra con "Gracias" porque eso queda para después de la demo.
