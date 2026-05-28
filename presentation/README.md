@@ -2,7 +2,8 @@
 
 Presentación de **5 minutos** del TFG _Stay-Sidekick_ (CFGS DAW · Sergio Durán), construida con [reveal.js](https://revealjs.com) **vía CDN** (sin instalación local).
 
-- `index.html` — presentación completa (20 slides, CSS y JS embebidos o vía CDN).
+- `index.html` — estructura de slides (19 diapositivas, 5 pilares como stacks verticales).
+- `styles.css` — hoja de estilos externa con la arquitectura **ITCSS + BEM** trasladada literalmente de [`stay-sidekick/frontend/src/styles/`](../../stay-sidekick/frontend/src/styles/) (tokens, escala tipográfica, espaciado 4 px, componentes `.kicker`, `.card`, `.badge`, `.stat`, `.title-block`).
 - `OUTLINE.md` — guion editorial: slide-a-slide, pilares cubiertos, tiempos.
 
 > **Duración estimada:** ~5 minutos a ritmo de ~15-18 s por slide. Las _speaker notes_ (visibles con `S`) totalizan ~700 palabras.
@@ -71,7 +72,8 @@ Cualquier servicio de _static hosting_ sirve. Apunta la raíz de publicación a 
 
 ```
 presentation/
-├── index.html      # Presentación (HTML + CSS embebido + reveal.js vía CDN)
+├── index.html      # Estructura de slides (sin estilos inline)
+├── styles.css      # Hoja externa · arquitectura ITCSS espejo del SCSS del producto
 ├── OUTLINE.md      # Guion: orden de slides, pilares, tiempos
 └── README.md       # Este fichero
 ```
@@ -79,7 +81,9 @@ presentation/
 ## Notas técnicas
 
 - **reveal.js 5.1.0** servido desde `cdn.jsdelivr.net`.
-- Plugins activos: `RevealHighlight` (resaltado de código con Monokai) y `RevealNotes` (vista de presentador con `S`).
+- Plugins activos: `RevealHighlight` (resaltado de código con Monokai), `RevealNotes` (vista de presentador con `S`) y **mermaid 10.9.1** (diagrama de la topología Docker).
 - Tipografía **Archivo** (la misma del producto real) cargada desde Google Fonts.
-- Tema oscuro personalizado sobre `night.css` con el acento ámbar de Stay-Sidekick.
+- Paleta corporativa importada del SCSS del producto: `--background` `#2B2B2B`, `--card` `#333`, `--sidebar` `#212121`, `--border` `#4F4F4F`, acento ámbar `#EFE3BC` con foreground `#5D423A`.
+- Reveal sobrescrito con `--r-main-font-size: 22px` para evitar el tamaño gigante por defecto (42 px).
 - **Sin** `localStorage`: cumple el requisito de portabilidad en entornos restringidos.
+- **Sin estilos inline**: toda la presentación va por clases BEM resueltas en `styles.css`.
