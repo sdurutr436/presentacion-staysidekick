@@ -1,0 +1,16 @@
+# Raíz de workspace propia para AISLAR este proyecto del workspace de ~/ (home).
+#
+# Motivo: existe un /home/Sergio/pnpm-workspace.yaml (creado por pnpm para
+# guardar `allowBuilds`). Sin este fichero, pnpm sube por el árbol hasta él,
+# trata /home/Sergio como raíz del proyecto e instala en /home/Sergio/node_modules
+# ignorando este package.json. Al tener su propio pnpm-workspace.yaml, la
+# presentación es su propia raíz y `pnpm install` instala en ./node_modules.
+packages: []
+
+# Decisión sobre scripts de build de dependencias (pnpm 11 los bloquea por
+# defecto). @parcel/watcher es una subdependencia nativa de `sass`, solo usada
+# para acelerar `sass --watch`; no la necesitamos (sass cae a polling), así que
+# NO la construimos. Ponerlo en `false` evita el ERR_PNPM_IGNORED_BUILDS que
+# rompía la comprobación de deps previa a `pnpm run`.
+allowBuilds:
+  '@parcel/watcher': false
