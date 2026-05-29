@@ -509,74 +509,12 @@ location /api/ {
       </div>
     </div>
 
+    <!-- Vendor (scripts clásicos: exponen Reveal, RevealHighlight, RevealNotes como globales) -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs';
 
-      // Paleta corporativa Stay-Sidekick — dark mode + acento ámbar fijo
-      mermaid.initialize({
-        startOnLoad: false,
-        theme: 'base',
-        securityLevel: 'loose',
-        fontFamily: 'Archivo, sans-serif',
-        themeVariables: {
-          fontFamily: 'Archivo, sans-serif',
-          fontSize: '13px',
-          background: 'transparent',
-
-          primaryColor: '#EFE3BC',
-          primaryTextColor: '#5D423A',
-          primaryBorderColor: '#EFE3BC',
-
-          secondaryColor: '#333333',
-          secondaryTextColor: '#DCDCDC',
-          secondaryBorderColor: '#4F4F4F',
-
-          tertiaryColor: '#212121',
-          tertiaryTextColor: '#DCDCDC',
-          tertiaryBorderColor: '#4F4F4F',
-
-          mainBkg: '#333333',
-          nodeBorder: '#4F4F4F',
-          clusterBkg: 'rgba(239, 227, 188, 0.03)',
-          clusterBorder: '#4F4F4F',
-
-          lineColor: '#EFE3BC',
-          textColor: '#DCDCDC',
-          edgeLabelBackground: '#2B2B2B',
-        },
-        flowchart: {
-          curve: 'basis',
-          useMaxWidth: true,
-          htmlLabels: true,
-          padding: 10,
-        },
-      });
-
-      Reveal.initialize({
-        hash: true,
-        slideNumber: 'c/t',
-        progress: true,
-        controls: true,
-        controlsTutorial: false,
-        center: false,
-        transition: 'slide',
-        backgroundTransition: 'fade',
-        plugins: [RevealHighlight, RevealNotes],
-      });
-
-      const renderMermaid = async () => {
-        const pending = document.querySelectorAll('pre.mermaid:not([data-processed])');
-        if (pending.length) {
-          await mermaid.run({ nodes: pending });
-          if (window.Reveal) Reveal.layout();
-        }
-      };
-
-      Reveal.on('ready', renderMermaid);
-      Reveal.on('slidechanged', renderMermaid);
-    </script>
+    <!-- App (módulo: arranque de mermaid + reveal, compartimentado en js/) -->
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
