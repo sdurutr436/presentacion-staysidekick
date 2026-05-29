@@ -22,6 +22,9 @@
 
 html.reveal-full-page,
 body.reveal-viewport {
+  // Subir la base rem de 16 → 22 px escala TODOS los valores rem del proyecto
+  // sin tocar el sistema de unidades de Reveal (que usa em de --r-main-font-size).
+  font-size: 22px;
   background:
     radial-gradient(1000px 500px at 85% -10%, hsla(47, 78%, 68%, 0.08), transparent 60%),
     radial-gradient(900px 500px at -10% 110%, hsla(47, 78%, 68%, 0.05), transparent 55%),

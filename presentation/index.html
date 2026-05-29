@@ -62,21 +62,21 @@
             <em class="kicker">Origen <span class="kicker__nav">· 2/3 ↓</span></em>
             <h2>Tres iteraciones antes del TFG</h2>
             <div class="grid grid--3">
-              <article class="card fragment">
+              <article class="card card--h fragment">
                 <h4 class="card__title">v1 · JavaFX</h4>
                 <div class="card__body">
                   <p>Prototipo de escritorio.</p>
                   <p>Nunca salió del laboratorio.</p>
                 </div>
               </article>
-              <article class="card fragment">
+              <article class="card card--h fragment">
                 <h4 class="card__title">v2 · MERN</h4>
                 <div class="card__body">
                   <p>Mongo + Express + React + Node.</p>
                   <p><strong>Hoy sigue en uso real</strong> en la empresa.</p>
                 </div>
               </article>
-              <article class="card fragment">
+              <article class="card card--h fragment">
                 <h4 class="card__title">v3 · Stay-Sidekick</h4>
                 <div class="card__body">
                   <p>Full-stack multi-tenant.</p>
@@ -99,7 +99,6 @@
               <li class="fragment">Cubre <strong>lo que el PMS no resuelve</strong>: mapa de calor, check-in tardío, vault de comunicaciones, sincronización Google.</li>
               <li class="fragment">Arquitectura <strong>multi-tenant</strong> real con aislamiento por <code>empresa_id</code>.</li>
             </ul>
-            <p class="u-muted">stay-sidekick.com · espejo en stay-sidekick.up.railway.app</p>
             <aside class="notes">
               Stay-Sidekick no quiere sustituir al PMS, lo complementa. Cubre el hueco operativo: mapa
               de calor del día, check-ins tardíos, plantillas de mensajes, sincronización con Google
@@ -111,37 +110,10 @@
         <!-- ═══════════════════════════════════════════════════════════════════
              3 · STACK (mermaid)
              ═══════════════════════════════════════════════════════════════════ -->
+        <!-- ─────────────────────────────────────────────────────────────────
+             PENDIENTE: insertar aquí el esquema de arquitectura (imagen).
+             ───────────────────────────────────────────────────────────────── -->
         <section>
-          <em class="kicker">Stack</em>
-          <h2>Una arquitectura, cinco contenedores</h2>
-          <pre class="mermaid">
-%%{init: {'flowchart': {'curve': 'basis', 'nodeSpacing': 32, 'rankSpacing': 45}}}%%
-flowchart LR
-    Cliente(["Cliente HTTP"]):::client
-
-    subgraph app_net["app-net · red interna Docker"]
-        direction TB
-        Nginx["nginx<br/>alpine · :80"]:::edge
-        Backend["backend<br/>Flask + Gunicorn · :5000"]:::svc
-        Frontend["frontend<br/>Angular + nginx · :80"]:::svc
-        Web["web<br/>11ty + nginx · :80"]:::svc
-        Postgres[("postgres<br/>PostgreSQL 16 · :5432")]:::db
-    end
-
-    Cliente ==>|"HTTP :80"| Nginx
-    Nginx -->|"/api/*"| Backend
-    Nginx -->|"/menu/*"| Frontend
-    Nginx -->|"/*"| Web
-    Backend -->|"SQL"| Postgres
-
-    classDef client fill:#212121,stroke:#4F4F4F,color:#DCDCDC,stroke-width:1px;
-    classDef edge   fill:#EFE3BC,stroke:#EFE3BC,color:#5D423A,stroke-width:2px,font-weight:700;
-    classDef svc    fill:#333333,stroke:#4F4F4F,color:#DCDCDC,stroke-width:1px;
-    classDef db     fill:#2B2B2B,stroke:#EFE3BC,color:#DCDCDC,stroke-width:1.5px;
-          </pre>
-          <p class="u-muted u-center">
-            Solo Nginx expone el <strong>:80</strong>. El resto vive dentro de <code>app-net</code>.
-          </p>
           <aside class="notes">
             Esta es la topología de cinco contenedores. El cliente solo ve el puerto 80 del Nginx
             externo, que reparte: barra api al backend Flask, barra menú a Angular, barra raíz al
@@ -156,15 +128,15 @@ flowchart LR
           <section>
             <em class="kicker">Frontend <span class="kicker__nav">· 1/4 ↓</span></em>
             <h2>¿Por qué <span class="badge badge--accent">Angular + 11ty</span>?</h2>
-            <div class="grid grid--2">
-              <article class="card fragment">
+            <div class="grid grid--2 fragment">
+              <article class="card">
                 <h4 class="card__title">Angular 21 → <code>/menu</code></h4>
                 <div class="card__body">
                   <p>Panel privado: estado complejo, formularios densos, guards, signals.</p>
                   <p>Tipado fuerte y arquitectura mantenible a 3 años vista.</p>
                 </div>
               </article>
-              <article class="card fragment">
+              <article class="card">
                 <h4 class="card__title">11ty → <code>/</code></h4>
                 <div class="card__body">
                   <p>Landing, legales, blog, 404. Contenido casi 100 % estático.</p>
@@ -172,9 +144,6 @@ flowchart LR
                 </div>
               </article>
             </div>
-            <p class="fragment u-muted u-mt-4">
-              Cada herramienta donde mejor rinde — y se sirven juntas por el mismo Nginx.
-            </p>
             <aside class="notes">
               La decisión más visible del frontend es usar dos tecnologías: Angular para lo dinámico,
               11ty para lo estático. Una SPA para la landing sería matar moscas a cañonazos. Cada
@@ -240,9 +209,6 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
   }
 });
             </code></pre>
-            <p class="fragment u-muted">
-              Cambio el tema en el panel Angular con la landing 11ty abierta en otra pestaña → también vira. Mismo origen, mismo <code>localStorage</code>.
-            </p>
             <aside class="notes">
               Lo bonito: si cambio el tema en el panel y tengo la landing abierta en otra pestaña, la
               landing también cambia. El evento storage se dispara solo en pestañas distintas a la que
@@ -259,11 +225,11 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
             <em class="kicker">Diseño UI <span class="kicker__nav">· 1/2 ↓</span></em>
             <h2>Sistema acromático + acento ámbar</h2>
             <div class="grid grid--2">
-              <ul>
-                <li class="fragment">Escala de grises HSL de 9 pasos.</li>
-                <li class="fragment">Un único acento cálido <code>#EFE3BC</code>.</li>
-                <li class="fragment"><em>Ley de Hick</em>: menos color, menos carga cognitiva en paneles densos.</li>
-                <li class="fragment">Tipografía única: <strong>Archivo</strong> variable, pesos 400-800.</li>
+              <ul class="fragment">
+                <li>Escala de grises HSL de 9 pasos.</li>
+                <li>Un único acento cálido <code>#EFE3BC</code>.</li>
+                <li><em>Ley de Hick</em>: menos color, menos carga cognitiva en paneles densos.</li>
+                <li>Tipografía única: <strong>Archivo</strong> variable, pesos 400-800.</li>
               </ul>
               <article class="card fragment">
                 <h4 class="card__title">Tokens semánticos</h4>
@@ -290,7 +256,7 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
               <div class="stat"><span class="stat__n">9</span><span class="stat__l">pantallas auditadas WAVE</span></div>
               <div class="stat"><span class="stat__n">4 px</span><span class="stat__l">cuadrícula base</span></div>
             </div>
-            <ul class="u-mt-4">
+            <ul class="u-mt-8">
               <li class="fragment">Auditoría <strong>WAVE</strong> + <strong>Lighthouse</strong> publicada en la memoria técnica.</li>
               <li class="fragment">Confirmaciones en acciones destructivas (prevención de errores).</li>
               <li class="fragment">Feedback explícito: spinners, toasts accionables, estados vacíos.</li>
@@ -340,7 +306,7 @@ class ApartamentoCreateSchema(Schema):
                 data[field] = nh3.clean(data[field], tags=set()).strip()
         return data
             </code></pre>
-            <p class="fragment u-muted">
+            <p>
               <strong>Sanitiza primero, valida después.</strong> El blueprint nunca toca un dict crudo del cliente.
             </p>
             <aside class="notes">
@@ -425,10 +391,10 @@ add_header Content-Security-Policy "
   object-src 'none'; base-uri 'self'; form-action 'self';
 " always;
             </code></pre>
-            <ul>
-              <li class="fragment">El 11ty inyecta <strong>scripts inline</strong> mínimos (toggle de tema, anti-FOUC).</li>
-              <li class="fragment">Opción A — <code>'unsafe-inline'</code>. Rechazada: rompe el modelo de amenaza.</li>
-              <li class="fragment">Opción B — <strong>hashear cada script</strong> y declararlo en la CSP. <em>Hecho</em>.</li>
+            <ul class="fragment">
+              <li>El 11ty inyecta <strong>scripts inline</strong> mínimos (toggle de tema, anti-FOUC).</li>
+              <li>Opción A — <code>'unsafe-inline'</code>. Rechazada: rompe el modelo de amenaza.</li>
+              <li>Opción B — <strong>hashear cada script</strong> y declararlo en la CSP. <em>Hecho</em>.</li>
             </ul>
             <aside class="notes">
               La CSP estricta y el 11ty chocaron de frente. El 11ty inyecta dos scripts inline para el
@@ -452,7 +418,7 @@ location /api/ {
     ...
 }
             </code></pre>
-            <p class="fragment u-muted">
+            <p>
               TLS lo termina Railway en el edge — Nginx solo escucha en <code>:80</code> dentro de la red privada IPv6.
             </p>
             <aside class="notes">

@@ -21,6 +21,26 @@
     line-height: var(--ss-lh-heading);
   }
 
+  // Variante horizontal: título a la izquierda, cuerpo a la derecha.
+  // Usada en slides con grid--3 donde las cards son muy estrechas.
+  &--h {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--ss-space-4);
+
+    .card__title {
+      flex: 0 0 auto;
+      min-width: 7rem;
+      margin-bottom: 0;
+      padding-right: var(--ss-space-4);
+      border-right: 1px solid var(--ss-border);
+    }
+
+    .card__body {
+      flex: 1;
+    }
+  }
+
   &__body {
     margin: 0;
 
