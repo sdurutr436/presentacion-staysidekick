@@ -1,0 +1,11 @@
+// =============================================================================
+// COMPONENTS · quote
+// =============================================================================
+
+.quote {
+  font-style: italic;
+  color: var(--ss-muted);
+  border-left: 3px solid var(--ss-accent);
+  padding-left: var(--ss-space-4);
+  margin: var(--ss-space-4) 0;
+}

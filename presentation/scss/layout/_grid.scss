@@ -1,0 +1,21 @@
+// =============================================================================
+// LAYOUT · grids (espejo de layout/_grid.scss)
+// =============================================================================
+
+.grid {
+  display: grid;
+  gap: var(--ss-space-4);
+
+  &--2 {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ss-space-6);
+  }
+
+  &--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

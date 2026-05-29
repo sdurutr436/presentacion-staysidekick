@@ -1,0 +1,60 @@
+// =============================================================================
+// VENDOR · mermaid — render dentro de reveal
+// Aísla el SVG de las reglas .reveal pre y aplica colores corporativos al texto.
+// =============================================================================
+
+.reveal pre.mermaid,
+.reveal .mermaid {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  font-size: 1em;
+  line-height: 1.2;
+  max-height: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--ss-space-2) 0;
+  padding: 0;
+}
+
+.reveal .mermaid svg,
+.reveal pre.mermaid svg {
+  max-width: 100%;
+  max-height: 58vh;
+  width: auto !important;
+  height: auto !important;
+}
+
+.reveal .mermaid {
+  .nodeLabel,
+  .edgeLabel {
+    font-family: var(--ss-font-sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+  }
+
+  .edgeLabel rect {
+    fill: var(--ss-bg) !important;
+  }
+
+  .edgeLabel p {
+    background-color: var(--ss-bg) !important;
+    color: var(--ss-fg) !important;
+  }
+
+  .cluster rect {
+    fill: hsla(47, 64%, 87%, 0.03) !important;
+    stroke: var(--ss-border) !important;
+    stroke-dasharray: 4 3 !important;
+  }
+
+  .cluster-label .nodeLabel {
+    color: var(--ss-accent) !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}

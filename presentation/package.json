@@ -1,0 +1,17 @@
+{
+  "name": "stay-sidekick-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presentación TFG de Stay-Sidekick (reveal.js + SCSS, arquitectura ITCSS espejo del producto)",
+  "type": "module",
+  "scripts": {
+    "build:css": "sass scss/main.scss:styles.css --no-source-map --style=expanded",
+    "watch:css": "sass --watch scss/main.scss:styles.css --no-source-map --style=expanded",
+    "serve": "http-server -p 8000 -c-1 .",
+    "dev": "pnpm run build:css && (pnpm run watch:css & pnpm run serve)"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "sass": "^1.100.0"
+  }
+}

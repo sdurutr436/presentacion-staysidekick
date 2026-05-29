@@ -1,0 +1,83 @@
+// =============================================================================
+// SETTINGS · tokens
+// Mapeo 1:1 desde:
+//   - frontend/src/styles/settings/_css-variables.scss (modo oscuro)
+//   - frontend/src/styles/settings/_tipografia.scss
+//   - frontend/src/styles/settings/_variables.scss
+// Prefijo --ss-* para no chocar con los tokens del propio reveal.
+// =============================================================================
+
+:root {
+  // Paleta — modo oscuro
+  --ss-bg:            hsl(0, 0%, 16.86%);   // #2B2B2B · --background dark
+  --ss-bg-deep:       hsl(0, 0%, 12.94%);   // #212121 · --sidebar dark
+  --ss-card:          hsl(0, 0%, 20%);      // #333333 · --card dark
+  --ss-muted-bg:      hsl(0, 0%, 27.06%);   // #454545 · --muted dark
+  --ss-border:        hsl(0, 0%, 30.98%);   // #4F4F4F · --border dark
+  --ss-border-strong: hsl(0, 0%, 50%);      // #808080 · --border-strong dark
+  --ss-fg:            hsl(0, 0%, 86.27%);   // #DCDCDC · --foreground dark
+  --ss-fg-soft:       hsl(0, 0%, 75.29%);   // #C0C0C0 · --secondary-foreground
+  --ss-muted:         hsl(0, 0%, 62.75%);   // #A0A0A0 · --muted-foreground
+  --ss-accent:        hsl(47.44, 64.18%, 86.86%);   // #EFE3BC · acento ámbar fijo
+  --ss-accent-fg:     hsl(14.21, 25.68%, 29.02%);   // #5D423A · accent-foreground
+
+  --ss-success: hsl(122, 39%, 49%);
+  --ss-warn:    hsl(38, 92%, 50%);
+  --ss-danger:  hsl(0, 41.49%, 63.14%);
+
+  // Tipografía — fuentes
+  --ss-font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ss-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  // Tipografía — escala (rem) · alineada con _tipografia.scss y ajustada a la
+  // densidad de una presentación (no nos sirve el 64 px del display original)
+  --ss-fs-display-lg: 2.5rem;     // 40 px · brand portada
+  --ss-fs-h1:         2.25rem;    // 36 px
+  --ss-fs-h2:         1.625rem;   // 26 px
+  --ss-fs-h3:         1.25rem;    // 20 px
+  --ss-fs-h4:         1.125rem;   // 18 px
+  --ss-fs-body-xl:    1.0625rem;  // 17 px
+  --ss-fs-body-lg:    1rem;       // 16 px
+  --ss-fs-body-md:    0.875rem;   // 14 px
+  --ss-fs-body-sm:    0.8125rem;  // 13 px
+  --ss-fs-label-md:   0.75rem;    // 12 px
+  --ss-fs-label-sm:   0.6875rem;  // 11 px
+  --ss-fs-caption-md: 0.75rem;    // 12 px
+  --ss-fs-code:       0.85em;
+
+  --ss-fw-display: 800;
+  --ss-fw-heading: 700;
+  --ss-fw-body:    500;
+  --ss-fw-caption: 400;
+
+  --ss-lh-display: 1.1;
+  --ss-lh-heading: 1.2;
+  --ss-lh-body:    1.5;
+  --ss-lh-label:   1.4;
+
+  // Espaciado · escala base 4 px (de _variables.scss)
+  --ss-space-1:  0.25rem;
+  --ss-space-2:  0.5rem;
+  --ss-space-3:  0.75rem;
+  --ss-space-4:  1rem;
+  --ss-space-5:  1.25rem;
+  --ss-space-6:  1.5rem;
+  --ss-space-8:  2rem;
+  --ss-space-10: 2.5rem;
+  --ss-space-12: 3rem;
+
+  // Radio (de _variables.scss)
+  --ss-radius:    0.625rem;        // 10 px
+  --ss-radius-sm: calc(var(--ss-radius) - 4px);
+  --ss-radius-md: calc(var(--ss-radius) - 2px);
+  --ss-radius-lg: var(--ss-radius);
+  --ss-radius-xl: calc(var(--ss-radius) + 4px);
+
+  // Sombras
+  --ss-shadow-sm: 1px 4px 5px 0 hsla(0, 0%, 0%, 0.15), 1px 1px 2px -1px hsla(0, 0%, 0%, 0.15);
+  --ss-shadow-md: 1px 4px 5px 0 hsla(0, 0%, 0%, 0.25), 1px 2px 4px -1px hsla(0, 0%, 0%, 0.25);
+  --ss-shadow-lg: 0 18px 40px hsla(0, 0%, 0%, 0.45);
+
+  // Transiciones
+  --ss-transition-base: 150ms ease;
+}

@@ -1,0 +1,26 @@
+// =============================================================================
+// COMPONENTS · stat — atom (cifras destacadas, p. ej. "92 tests")
+// =============================================================================
+
+.stat {
+  text-align: center;
+
+  &__n {
+    display: block;
+    font-family: var(--ss-font-sans);
+    font-weight: var(--ss-fw-display);
+    font-size: 2.2em;
+    line-height: 1;
+    color: var(--ss-accent);
+  }
+
+  &__l {
+    display: block;
+    margin-top: var(--ss-space-1);
+    color: var(--ss-muted);
+    font-size: var(--ss-fs-caption-md);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+  }
+}

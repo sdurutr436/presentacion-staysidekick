@@ -1,0 +1,32 @@
+// =============================================================================
+// COMPONENTS · title-block — organism (portada y cierre)
+// =============================================================================
+
+.title-block {
+  text-align: center;
+  padding-top: var(--ss-space-4);
+
+  &__brand {
+    font-family: var(--ss-font-sans);
+    font-size: var(--ss-fs-display-lg);
+    font-weight: var(--ss-fw-display);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ss-accent);
+    margin: 0;
+  }
+
+  &__sub {
+    margin-top: var(--ss-space-4);
+    font-size: var(--ss-fs-body-xl);
+    color: var(--ss-fg);
+  }
+
+  &__meta {
+    margin-top: var(--ss-space-8);
+    color: var(--ss-muted);
+    font-size: var(--ss-fs-caption-md);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+  }
+}

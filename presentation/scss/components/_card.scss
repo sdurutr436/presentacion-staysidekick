@@ -1,0 +1,42 @@
+// =============================================================================
+// COMPONENTS · card — molécula (de _card.scss, adaptada al modo oscuro y BEM)
+// =============================================================================
+
+.card {
+  background: var(--ss-card);
+  border: 1px solid var(--ss-border);
+  border-radius: var(--ss-radius-lg);
+  padding: var(--ss-space-4) var(--ss-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-2);
+  transition: box-shadow var(--ss-transition-base);
+
+  &__title {
+    margin: 0;
+    color: var(--ss-accent);
+    font-family: var(--ss-font-sans);
+    font-size: var(--ss-fs-body-lg);
+    font-weight: var(--ss-fw-heading);
+    line-height: var(--ss-lh-heading);
+  }
+
+  &__body {
+    margin: 0;
+
+    p,
+    li {
+      font-size: var(--ss-fs-body-md);
+      margin: 0 0 var(--ss-space-1) 0;
+      color: var(--ss-fg);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .u-muted {
+      color: var(--ss-muted);
+    }
+  }
+}

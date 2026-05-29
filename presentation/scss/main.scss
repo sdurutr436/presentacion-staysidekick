@@ -1,0 +1,34 @@
+// =============================================================================
+// STAY-SIDEKICK · PRESENTATION STYLES — punto de entrada
+// Arquitectura ITCSS, espejo de frontend/src/styles/ del producto.
+// Orden de capas (de menor a mayor especificidad):
+//   settings → generic → elements → layout → components → utilities → vendor
+// Compilar con:  pnpm run build:css   (sass scss/main.scss → styles.css)
+// =============================================================================
+
+// 1 · SETTINGS — tokens (custom properties, sin salida CSS propia salvo :root)
+@use 'settings/tokens';
+
+// 2 · GENERIC — overrides del tema reveal
+@use 'generic/reveal-overrides';
+
+// 3 · ELEMENTS — etiquetas HTML desnudas
+@use 'elements/base';
+
+// 4 · LAYOUT — rejillas
+@use 'layout/grid';
+
+// 5 · COMPONENTS — átomos / moléculas BEM
+@use 'components/kicker';
+@use 'components/badge';
+@use 'components/card';
+@use 'components/stat';
+@use 'components/title-block';
+@use 'components/quote';
+@use 'components/code';
+
+// 6 · UTILITIES — helpers de una sola responsabilidad
+@use 'utilities/utilities';
+
+// 7 · VENDOR — terceros (mermaid dentro de reveal)
+@use 'vendor/mermaid';

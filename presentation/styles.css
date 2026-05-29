@@ -1,125 +1,92 @@
-/* =============================================================================
-   STAY-SIDEKICK · PRESENTATION STYLES
-   Trasladado desde frontend/src/styles/ (ITCSS + BEM)
-   Estructura: SETTINGS → REVEAL OVERRIDES → ELEMENTS → COMPONENTS → LAYOUT → UTILITIES
-   ============================================================================= */
-
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   1. SETTINGS · variables
-   Mapeo 1:1 desde:
-     - frontend/src/styles/settings/_css-variables.scss (modo oscuro)
-     - frontend/src/styles/settings/_tipografia.scss
-     - frontend/src/styles/settings/_variables.scss
-   Prefijo --ss-* para no chocar con tokens del propio reveal.
-   ───────────────────────────────────────────────────────────────────────────── */
+@charset "UTF-8";
 :root {
-  /* Paleta — modo oscuro */
-  --ss-bg:            hsl(0, 0%, 16.86%);   /* #2B2B2B · --background dark */
-  --ss-bg-deep:       hsl(0, 0%, 12.94%);   /* #212121 · --sidebar dark */
-  --ss-card:          hsl(0, 0%, 20%);      /* #333333 · --card dark */
-  --ss-muted-bg:      hsl(0, 0%, 27.06%);   /* #454545 · --muted dark */
-  --ss-border:        hsl(0, 0%, 30.98%);   /* #4F4F4F · --border dark */
-  --ss-border-strong: hsl(0, 0%, 50%);      /* #808080 · --border-strong dark */
-  --ss-fg:            hsl(0, 0%, 86.27%);   /* #DCDCDC · --foreground dark */
-  --ss-fg-soft:       hsl(0, 0%, 75.29%);   /* #C0C0C0 · --secondary-foreground */
-  --ss-muted:         hsl(0, 0%, 62.75%);   /* #A0A0A0 · --muted-foreground */
-  --ss-accent:        hsl(47.44, 64.18%, 86.86%);   /* #EFE3BC · acento ámbar fijo */
-  --ss-accent-fg:     hsl(14.21, 25.68%, 29.02%);   /* #5D423A · accent-foreground */
-
+  --ss-bg: hsl(0, 0%, 16.86%);
+  --ss-bg-deep: hsl(0, 0%, 12.94%);
+  --ss-card: hsl(0, 0%, 20%);
+  --ss-muted-bg: hsl(0, 0%, 27.06%);
+  --ss-border: hsl(0, 0%, 30.98%);
+  --ss-border-strong: hsl(0, 0%, 50%);
+  --ss-fg: hsl(0, 0%, 86.27%);
+  --ss-fg-soft: hsl(0, 0%, 75.29%);
+  --ss-muted: hsl(0, 0%, 62.75%);
+  --ss-accent: hsl(47.44, 64.18%, 86.86%);
+  --ss-accent-fg: hsl(14.21, 25.68%, 29.02%);
   --ss-success: hsl(122, 39%, 49%);
-  --ss-warn:    hsl(38, 92%, 50%);
-  --ss-danger:  hsl(0, 41.49%, 63.14%);
-
-  /* Tipografía — fuentes */
+  --ss-warn: hsl(38, 92%, 50%);
+  --ss-danger: hsl(0, 41.49%, 63.14%);
   --ss-font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ss-font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-  /* Tipografía — escala (rem) · alineada con _tipografia.scss y ajustada a la
-     densidad de una presentación (no nos sirve el 64 px del display original) */
-  --ss-fs-display-lg: 2.5rem;     /* 40 px · brand portada */
-  --ss-fs-h1:         2.25rem;    /* 36 px */
-  --ss-fs-h2:         1.625rem;   /* 26 px */
-  --ss-fs-h3:         1.25rem;    /* 20 px */
-  --ss-fs-h4:         1.125rem;   /* 18 px */
-  --ss-fs-body-xl:    1.0625rem;  /* 17 px */
-  --ss-fs-body-lg:    1rem;       /* 16 px */
-  --ss-fs-body-md:    0.875rem;   /* 14 px */
-  --ss-fs-body-sm:    0.8125rem;  /* 13 px */
-  --ss-fs-label-md:   0.75rem;    /* 12 px */
-  --ss-fs-label-sm:   0.6875rem;  /* 11 px */
-  --ss-fs-caption-md: 0.75rem;    /* 12 px */
-  --ss-fs-code:       0.85em;
-
+  --ss-fs-display-lg: 2.5rem;
+  --ss-fs-h1: 2.25rem;
+  --ss-fs-h2: 1.625rem;
+  --ss-fs-h3: 1.25rem;
+  --ss-fs-h4: 1.125rem;
+  --ss-fs-body-xl: 1.0625rem;
+  --ss-fs-body-lg: 1rem;
+  --ss-fs-body-md: 0.875rem;
+  --ss-fs-body-sm: 0.8125rem;
+  --ss-fs-label-md: 0.75rem;
+  --ss-fs-label-sm: 0.6875rem;
+  --ss-fs-caption-md: 0.75rem;
+  --ss-fs-code: 0.85em;
   --ss-fw-display: 800;
   --ss-fw-heading: 700;
-  --ss-fw-body:    500;
+  --ss-fw-body: 500;
   --ss-fw-caption: 400;
-
   --ss-lh-display: 1.1;
   --ss-lh-heading: 1.2;
-  --ss-lh-body:    1.5;
-  --ss-lh-label:   1.4;
-
-  /* Espaciado · escala base 4 px (de _variables.scss) */
-  --ss-space-1:  0.25rem;
-  --ss-space-2:  0.5rem;
-  --ss-space-3:  0.75rem;
-  --ss-space-4:  1rem;
-  --ss-space-5:  1.25rem;
-  --ss-space-6:  1.5rem;
-  --ss-space-8:  2rem;
+  --ss-lh-body: 1.5;
+  --ss-lh-label: 1.4;
+  --ss-space-1: 0.25rem;
+  --ss-space-2: 0.5rem;
+  --ss-space-3: 0.75rem;
+  --ss-space-4: 1rem;
+  --ss-space-5: 1.25rem;
+  --ss-space-6: 1.5rem;
+  --ss-space-8: 2rem;
   --ss-space-10: 2.5rem;
   --ss-space-12: 3rem;
-
-  /* Radio (de _variables.scss) */
-  --ss-radius:    0.625rem;        /* 10 px */
+  --ss-radius: 0.625rem;
   --ss-radius-sm: calc(var(--ss-radius) - 4px);
   --ss-radius-md: calc(var(--ss-radius) - 2px);
   --ss-radius-lg: var(--ss-radius);
   --ss-radius-xl: calc(var(--ss-radius) + 4px);
-
-  /* Sombras */
   --ss-shadow-sm: 1px 4px 5px 0 hsla(0, 0%, 0%, 0.15), 1px 1px 2px -1px hsla(0, 0%, 0%, 0.15);
   --ss-shadow-md: 1px 4px 5px 0 hsla(0, 0%, 0%, 0.25), 1px 2px 4px -1px hsla(0, 0%, 0%, 0.25);
   --ss-shadow-lg: 0 18px 40px hsla(0, 0%, 0%, 0.45);
-
-  /* Transiciones */
   --ss-transition-base: 150ms ease;
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   2. REVEAL · overrides
-   El tema black.css fija un --r-main-font-size de 42px, que es enorme para una
-   presentación técnica densa como esta. Lo reducimos a 22 px (≈ texto de panel).
-   ───────────────────────────────────────────────────────────────────────────── */
 .reveal {
-  --r-main-font:         var(--ss-font-sans);
-  --r-main-font-size:    22px;
-  --r-heading-font:      var(--ss-font-sans);
-  --r-heading-color:     var(--ss-accent);
-  --r-link-color:        var(--ss-accent);
-  --r-link-color-hover:  var(--ss-accent);
-  --r-link-color-dark:   var(--ss-accent);
-  --r-selection-color:   var(--ss-accent-fg);
+  --r-main-font: var(--ss-font-sans);
+  --r-main-font-size: 22px;
+  --r-heading-font: var(--ss-font-sans);
+  --r-heading-color: var(--ss-accent);
+  --r-link-color: var(--ss-accent);
+  --r-link-color-hover: var(--ss-accent);
+  --r-link-color-dark: var(--ss-accent);
+  --r-selection-color: var(--ss-accent-fg);
   --r-selection-background-color: var(--ss-accent);
-
   font-family: var(--ss-font-sans);
   color: var(--ss-fg);
 }
 
 html.reveal-full-page,
 body.reveal-viewport {
-  background:
-    radial-gradient(1000px 500px at 85% -10%, hsla(47, 64%, 87%, 0.06), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, hsla(47, 64%, 87%, 0.04), transparent 55%),
-    var(--ss-bg);
+  background: radial-gradient(1000px 500px at 85% -10%, hsla(47, 64%, 87%, 0.06), transparent 60%), radial-gradient(900px 500px at -10% 110%, hsla(47, 64%, 87%, 0.04), transparent 55%), var(--ss-bg);
 }
 
-.reveal .slides       { text-align: left; }
-.reveal section       { background: transparent; }
-.reveal .progress     { color: var(--ss-accent); }
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal section {
+  background: transparent;
+}
+
+.reveal .progress {
+  color: var(--ss-accent);
+}
 
 .reveal .slide-number {
   background: hsla(0, 0%, 0%, 0.4);
@@ -127,10 +94,6 @@ body.reveal-viewport {
   color: var(--ss-muted);
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   3. ELEMENTS · h1-h4, p, li, code, strong  (espejo de elements/_base.scss)
-   ───────────────────────────────────────────────────────────────────────────── */
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -141,51 +104,43 @@ body.reveal-viewport {
   letter-spacing: -0.01em;
   margin-bottom: var(--ss-space-4);
 }
-
 .reveal h1 {
   font-size: var(--ss-fs-h1);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
 }
-
 .reveal h2 {
   font-size: var(--ss-fs-h2);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
 }
-
 .reveal h3 {
   font-size: var(--ss-fs-h3);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
   color: var(--ss-fg);
 }
-
 .reveal h4 {
   font-size: var(--ss-fs-h4);
   font-weight: var(--ss-fw-body);
   line-height: var(--ss-lh-heading);
 }
-
 .reveal p,
 .reveal li {
   font-size: var(--ss-fs-body-lg);
   font-weight: var(--ss-fw-body);
   line-height: var(--ss-lh-body);
 }
-
 .reveal strong,
 .reveal b {
   color: var(--ss-accent);
   font-weight: var(--ss-fw-heading);
 }
-
 .reveal a {
   color: var(--ss-accent);
   text-decoration: none;
   border-bottom: 1px dashed var(--ss-accent);
 }
-
 .reveal code {
   font-family: var(--ss-font-mono);
   font-size: var(--ss-fs-code);
@@ -194,21 +149,18 @@ body.reveal-viewport {
   padding: 0.05em 0.4em;
   border-radius: var(--ss-radius-sm);
 }
-
 .reveal ul {
   list-style: none;
   padding-left: 0;
   margin: 0 0 var(--ss-space-4) 0;
 }
-
 .reveal ul li {
   position: relative;
   padding-left: var(--ss-space-6);
   margin-bottom: var(--ss-space-2);
 }
-
 .reveal ul li::before {
-  content: '◆';
+  content: "◆";
   position: absolute;
   left: 0;
   top: 0.5em;
@@ -216,12 +168,21 @@ body.reveal-viewport {
   font-size: 0.65em;
 }
 
+.grid {
+  display: grid;
+  gap: var(--ss-space-4);
+}
+.grid--2 {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ss-space-6);
+}
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   4. COMPONENTS · átomos / moléculas (BEM, trasladados de components/)
-   ───────────────────────────────────────────────────────────────────────────── */
-
-/* 4.1 · KICKER — atom (etiqueta de sección y posición vertical) */
 .kicker {
   display: inline-block;
   font-style: normal;
@@ -237,7 +198,6 @@ body.reveal-viewport {
   border-radius: 999px;
   background: var(--ss-bg-deep);
 }
-
 .kicker__nav {
   color: var(--ss-muted);
   font-weight: var(--ss-fw-body);
@@ -246,7 +206,6 @@ body.reveal-viewport {
   letter-spacing: 0.05em;
 }
 
-/* 4.2 · BADGE — atom (de _badge.scss) */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -261,19 +220,16 @@ body.reveal-viewport {
   vertical-align: middle;
   white-space: nowrap;
 }
-
 .badge--accent {
   background: var(--ss-accent);
   color: var(--ss-accent-fg);
 }
-
 .badge--outline {
   background: transparent;
   border: 1px solid var(--ss-border);
   color: var(--ss-fg);
 }
 
-/* 4.3 · CARD — molécula (de _card.scss, adaptada al modo oscuro y BEM completo) */
 .card {
   background: var(--ss-card);
   border: 1px solid var(--ss-border);
@@ -284,7 +240,6 @@ body.reveal-viewport {
   gap: var(--ss-space-2);
   transition: box-shadow var(--ss-transition-base);
 }
-
 .card__title {
   margin: 0;
   color: var(--ss-accent);
@@ -293,32 +248,26 @@ body.reveal-viewport {
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
 }
-
 .card__body {
   margin: 0;
 }
-
 .card__body p,
 .card__body li {
   font-size: var(--ss-fs-body-md);
   margin: 0 0 var(--ss-space-1) 0;
   color: var(--ss-fg);
 }
-
 .card__body p:last-child,
 .card__body li:last-child {
   margin-bottom: 0;
 }
-
 .card__body .u-muted {
   color: var(--ss-muted);
 }
 
-/* 4.4 · STAT — atom (cifras destacadas, p.ej. "92 tests") */
 .stat {
   text-align: center;
 }
-
 .stat__n {
   display: block;
   font-family: var(--ss-font-sans);
@@ -327,7 +276,6 @@ body.reveal-viewport {
   line-height: 1;
   color: var(--ss-accent);
 }
-
 .stat__l {
   display: block;
   margin-top: var(--ss-space-1);
@@ -338,12 +286,10 @@ body.reveal-viewport {
   line-height: 1.3;
 }
 
-/* 4.5 · TITLE-BLOCK — organism (portada y cierre) */
 .title-block {
   text-align: center;
   padding-top: var(--ss-space-4);
 }
-
 .title-block__brand {
   font-family: var(--ss-font-sans);
   font-size: var(--ss-fs-display-lg);
@@ -353,13 +299,11 @@ body.reveal-viewport {
   color: var(--ss-accent);
   margin: 0;
 }
-
 .title-block__sub {
   margin-top: var(--ss-space-4);
   font-size: var(--ss-fs-body-xl);
   color: var(--ss-fg);
 }
-
 .title-block__meta {
   margin-top: var(--ss-space-8);
   color: var(--ss-muted);
@@ -368,7 +312,6 @@ body.reveal-viewport {
   letter-spacing: 0.25em;
 }
 
-/* 4.6 · QUOTE */
 .quote {
   font-style: italic;
   color: var(--ss-muted);
@@ -377,44 +320,6 @@ body.reveal-viewport {
   margin: var(--ss-space-4) 0;
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   5. LAYOUT · grids (espejo de layout/_grid.scss)
-   ───────────────────────────────────────────────────────────────────────────── */
-.grid {
-  display: grid;
-  gap: var(--ss-space-4);
-}
-
-.grid--2 {
-  grid-template-columns: 1fr 1fr;
-  gap: var(--ss-space-6);
-}
-
-.grid--3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.grid--4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   6. UTILITIES (espejo del enfoque utilities/_index.scss)
-   ───────────────────────────────────────────────────────────────────────────── */
-.u-lead    { font-size: var(--ss-fs-body-xl); color: var(--ss-fg); }
-.u-muted   { color: var(--ss-muted); font-size: var(--ss-fs-body-md); }
-.u-center  { text-align: center; }
-.u-mt-2    { margin-top: var(--ss-space-2); }
-.u-mt-4    { margin-top: var(--ss-space-4); }
-.u-mt-6    { margin-top: var(--ss-space-6); }
-.u-mt-8    { margin-top: var(--ss-space-8); }
-
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   7. CÓDIGO · pre / code blocks (reveal + highlight.js)
-   ───────────────────────────────────────────────────────────────────────────── */
 .reveal pre {
   box-shadow: var(--ss-shadow-lg);
   border-radius: var(--ss-radius-lg);
@@ -424,7 +329,6 @@ body.reveal-viewport {
   max-height: 56vh;
   margin: var(--ss-space-2) 0;
 }
-
 .reveal pre code {
   padding: var(--ss-space-4) var(--ss-space-5);
   border-radius: var(--ss-radius-lg);
@@ -435,11 +339,36 @@ body.reveal-viewport {
   max-height: 56vh;
 }
 
+.u-lead {
+  font-size: var(--ss-fs-body-xl);
+  color: var(--ss-fg);
+}
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   8. MERMAID · render dentro de reveal
-   Aísla el SVG de las reglas .reveal pre y aplica colores corporativos al texto.
-   ───────────────────────────────────────────────────────────────────────────── */
+.u-muted {
+  color: var(--ss-muted);
+  font-size: var(--ss-fs-body-md);
+}
+
+.u-center {
+  text-align: center;
+}
+
+.u-mt-2 {
+  margin-top: var(--ss-space-2);
+}
+
+.u-mt-4 {
+  margin-top: var(--ss-space-4);
+}
+
+.u-mt-6 {
+  margin-top: var(--ss-space-6);
+}
+
+.u-mt-8 {
+  margin-top: var(--ss-space-8);
+}
+
 .reveal pre.mermaid,
 .reveal .mermaid {
   background: transparent !important;
@@ -470,22 +399,18 @@ body.reveal-viewport {
   font-size: 12px !important;
   font-weight: 500 !important;
 }
-
 .reveal .mermaid .edgeLabel rect {
   fill: var(--ss-bg) !important;
 }
-
 .reveal .mermaid .edgeLabel p {
   background-color: var(--ss-bg) !important;
   color: var(--ss-fg) !important;
 }
-
 .reveal .mermaid .cluster rect {
   fill: hsla(47, 64%, 87%, 0.03) !important;
   stroke: var(--ss-border) !important;
   stroke-dasharray: 4 3 !important;
 }
-
 .reveal .mermaid .cluster-label .nodeLabel {
   color: var(--ss-accent) !important;
   font-weight: 700 !important;

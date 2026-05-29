@@ -1,0 +1,11 @@
+// =============================================================================
+// UTILITIES (espejo del enfoque utilities/_index.scss)
+// =============================================================================
+
+.u-lead   { font-size: var(--ss-fs-body-xl); color: var(--ss-fg); }
+.u-muted  { color: var(--ss-muted); font-size: var(--ss-fs-body-md); }
+.u-center { text-align: center; }
+.u-mt-2   { margin-top: var(--ss-space-2); }
+.u-mt-4   { margin-top: var(--ss-space-4); }
+.u-mt-6   { margin-top: var(--ss-space-6); }
+.u-mt-8   { margin-top: var(--ss-space-8); }

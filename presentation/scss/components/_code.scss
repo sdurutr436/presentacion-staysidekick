@@ -1,0 +1,23 @@
+// =============================================================================
+// COMPONENTS · code — bloques pre / code (reveal + highlight.js)
+// =============================================================================
+
+.reveal pre {
+  box-shadow: var(--ss-shadow-lg);
+  border-radius: var(--ss-radius-lg);
+  font-size: var(--ss-fs-body-sm);
+  line-height: 1.5;
+  width: 100%;
+  max-height: 56vh;
+  margin: var(--ss-space-2) 0;
+
+  code {
+    padding: var(--ss-space-4) var(--ss-space-5);
+    border-radius: var(--ss-radius-lg);
+    font-family: var(--ss-font-mono);
+    font-size: 0.95em;
+    background: var(--ss-bg-deep);
+    color: var(--ss-fg);
+    max-height: 56vh;
+  }
+}

@@ -1,0 +1,90 @@
+// =============================================================================
+// ELEMENTS · h1-h4, p, li, code, strong  (espejo de elements/_base.scss)
+// =============================================================================
+
+.reveal {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--ss-font-sans);
+    color: var(--ss-accent);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--ss-space-4);
+  }
+
+  h1 {
+    font-size: var(--ss-fs-h1);
+    font-weight: var(--ss-fw-heading);
+    line-height: var(--ss-lh-heading);
+  }
+
+  h2 {
+    font-size: var(--ss-fs-h2);
+    font-weight: var(--ss-fw-heading);
+    line-height: var(--ss-lh-heading);
+  }
+
+  h3 {
+    font-size: var(--ss-fs-h3);
+    font-weight: var(--ss-fw-heading);
+    line-height: var(--ss-lh-heading);
+    color: var(--ss-fg);
+  }
+
+  h4 {
+    font-size: var(--ss-fs-h4);
+    font-weight: var(--ss-fw-body);
+    line-height: var(--ss-lh-heading);
+  }
+
+  p,
+  li {
+    font-size: var(--ss-fs-body-lg);
+    font-weight: var(--ss-fw-body);
+    line-height: var(--ss-lh-body);
+  }
+
+  strong,
+  b {
+    color: var(--ss-accent);
+    font-weight: var(--ss-fw-heading);
+  }
+
+  a {
+    color: var(--ss-accent);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--ss-accent);
+  }
+
+  code {
+    font-family: var(--ss-font-mono);
+    font-size: var(--ss-fs-code);
+    background: var(--ss-bg-deep);
+    color: var(--ss-accent);
+    padding: 0.05em 0.4em;
+    border-radius: var(--ss-radius-sm);
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 var(--ss-space-4) 0;
+
+    li {
+      position: relative;
+      padding-left: var(--ss-space-6);
+      margin-bottom: var(--ss-space-2);
+
+      &::before {
+        content: '◆';
+        position: absolute;
+        left: 0;
+        top: 0.5em;
+        color: var(--ss-accent);
+        font-size: 0.65em;
+      }
+    }
+  }
+}
