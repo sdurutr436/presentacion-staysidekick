@@ -1,12 +1,13 @@
 // =============================================================================
 // GENERIC · reveal overrides
-// El tema black.css fija un --r-main-font-size de 42px, enorme para una
-// presentación técnica densa como esta. Lo reducimos a 22 px (≈ texto de panel).
+// El tema black.css fija un --r-main-font-size de 42px. Lo ajustamos a 28 px
+// (era 22 px): afecta el baseline del que parten las unidades em internas de
+// Reveal (controles, número de slide, etc.).
 // =============================================================================
 
 .reveal {
   --r-main-font:         var(--ss-font-sans);
-  --r-main-font-size:    22px;
+  --r-main-font-size:    40px;
   --r-heading-font:      var(--ss-font-sans);
   --r-heading-color:     var(--ss-accent);
   --r-link-color:        var(--ss-accent);
@@ -22,8 +23,8 @@
 html.reveal-full-page,
 body.reveal-viewport {
   background:
-    radial-gradient(1000px 500px at 85% -10%, hsla(47, 64%, 87%, 0.06), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, hsla(47, 64%, 87%, 0.04), transparent 55%),
+    radial-gradient(1000px 500px at 85% -10%, hsla(47, 78%, 68%, 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, hsla(47, 78%, 68%, 0.05), transparent 55%),
     var(--ss-bg);
 }
 

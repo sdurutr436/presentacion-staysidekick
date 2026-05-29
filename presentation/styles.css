@@ -9,26 +9,26 @@
   --ss-fg: hsl(0, 0%, 86.27%);
   --ss-fg-soft: hsl(0, 0%, 75.29%);
   --ss-muted: hsl(0, 0%, 62.75%);
-  --ss-accent: hsl(47.44, 64.18%, 86.86%);
-  --ss-accent-fg: hsl(14.21, 25.68%, 29.02%);
+  --ss-accent: hsl(47, 78%, 68%);
+  --ss-accent-fg: hsl(14, 35%, 22%);
   --ss-success: hsl(122, 39%, 49%);
   --ss-warn: hsl(38, 92%, 50%);
   --ss-danger: hsl(0, 41.49%, 63.14%);
   --ss-font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ss-font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --ss-fs-display-lg: 2.5rem;
-  --ss-fs-h1: 2.25rem;
-  --ss-fs-h2: 1.625rem;
-  --ss-fs-h3: 1.25rem;
-  --ss-fs-h4: 1.125rem;
-  --ss-fs-body-xl: 1.0625rem;
-  --ss-fs-body-lg: 1rem;
-  --ss-fs-body-md: 0.875rem;
-  --ss-fs-body-sm: 0.8125rem;
-  --ss-fs-label-md: 0.75rem;
-  --ss-fs-label-sm: 0.6875rem;
-  --ss-fs-caption-md: 0.75rem;
-  --ss-fs-code: 0.85em;
+  --ss-fs-display-lg: 4.5rem;
+  --ss-fs-h1: 3.5rem;
+  --ss-fs-h2: 2.75rem;
+  --ss-fs-h3: 2rem;
+  --ss-fs-h4: 1.625rem;
+  --ss-fs-body-xl: 1.5rem;
+  --ss-fs-body-lg: 1.375rem;
+  --ss-fs-body-md: 1.25rem;
+  --ss-fs-body-sm: 1.125rem;
+  --ss-fs-label-md: 1rem;
+  --ss-fs-label-sm: 0.9375rem;
+  --ss-fs-caption-md: 1rem;
+  --ss-fs-code: 0.9em;
   --ss-fw-display: 800;
   --ss-fw-heading: 700;
   --ss-fw-body: 500;
@@ -59,7 +59,7 @@
 
 .reveal {
   --r-main-font: var(--ss-font-sans);
-  --r-main-font-size: 22px;
+  --r-main-font-size: 40px;
   --r-heading-font: var(--ss-font-sans);
   --r-heading-color: var(--ss-accent);
   --r-link-color: var(--ss-accent);
@@ -73,7 +73,7 @@
 
 html.reveal-full-page,
 body.reveal-viewport {
-  background: radial-gradient(1000px 500px at 85% -10%, hsla(47, 64%, 87%, 0.06), transparent 60%), radial-gradient(900px 500px at -10% 110%, hsla(47, 64%, 87%, 0.04), transparent 55%), var(--ss-bg);
+  background: radial-gradient(1000px 500px at 85% -10%, hsla(47, 78%, 68%, 0.08), transparent 60%), radial-gradient(900px 500px at -10% 110%, hsla(47, 78%, 68%, 0.05), transparent 55%), var(--ss-bg);
 }
 
 .reveal .slides {
@@ -99,7 +99,6 @@ body.reveal-viewport {
 .reveal h3,
 .reveal h4 {
   font-family: var(--ss-font-sans);
-  color: var(--ss-accent);
   text-transform: none;
   letter-spacing: -0.01em;
   margin-bottom: var(--ss-space-4);
@@ -108,11 +107,13 @@ body.reveal-viewport {
   font-size: var(--ss-fs-h1);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
+  color: var(--ss-accent);
 }
 .reveal h2 {
   font-size: var(--ss-fs-h2);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
+  color: var(--ss-accent);
 }
 .reveal h3 {
   font-size: var(--ss-fs-h3);
@@ -124,6 +125,7 @@ body.reveal-viewport {
   font-size: var(--ss-fs-h4);
   font-weight: var(--ss-fw-body);
   line-height: var(--ss-lh-heading);
+  color: var(--ss-fg);
 }
 .reveal p,
 .reveal li {
@@ -242,9 +244,9 @@ body.reveal-viewport {
 }
 .card__title {
   margin: 0;
-  color: var(--ss-accent);
+  color: var(--ss-fg-soft);
   font-family: var(--ss-font-sans);
-  font-size: var(--ss-fs-body-lg);
+  font-size: var(--ss-fs-h4);
   font-weight: var(--ss-fw-heading);
   line-height: var(--ss-lh-heading);
 }

@@ -3,12 +3,13 @@
 // =============================================================================
 
 .reveal {
+  // Ámbar solo en h1 y h2 (títulos de slide — punto de acento principal).
+  // h3 y h4 usan blanco/fg para no saturar de color el slide.
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--ss-font-sans);
-    color: var(--ss-accent);
     text-transform: none;
     letter-spacing: -0.01em;
     margin-bottom: var(--ss-space-4);
@@ -18,12 +19,14 @@
     font-size: var(--ss-fs-h1);
     font-weight: var(--ss-fw-heading);
     line-height: var(--ss-lh-heading);
+    color: var(--ss-accent);
   }
 
   h2 {
     font-size: var(--ss-fs-h2);
     font-weight: var(--ss-fw-heading);
     line-height: var(--ss-lh-heading);
+    color: var(--ss-accent);
   }
 
   h3 {
@@ -37,6 +40,7 @@
     font-size: var(--ss-fs-h4);
     font-weight: var(--ss-fw-body);
     line-height: var(--ss-lh-heading);
+    color: var(--ss-fg);
   }
 
   p,

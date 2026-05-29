@@ -18,8 +18,11 @@
   --ss-fg:            hsl(0, 0%, 86.27%);   // #DCDCDC · --foreground dark
   --ss-fg-soft:       hsl(0, 0%, 75.29%);   // #C0C0C0 · --secondary-foreground
   --ss-muted:         hsl(0, 0%, 62.75%);   // #A0A0A0 · --muted-foreground
-  --ss-accent:        hsl(47.44, 64.18%, 86.86%);   // #EFE3BC · acento ámbar fijo
-  --ss-accent-fg:     hsl(14.21, 25.68%, 29.02%);   // #5D423A · accent-foreground
+  // Nota: la claridad 87% del ámbar original (#EFE3BC) lo hace casi blanco en
+  // proyectores. Para que se perciba como dorado/ámbar bajamos la claridad a 68%
+  // y subimos la saturación. El hue se mantiene intacto (identidad corporativa).
+  --ss-accent:        hsl(47, 78%, 68%);   // ~#EDD270 · ámbar visible en proyección
+  --ss-accent-fg:     hsl(14, 35%, 22%);   // oscuro cálido · texto sobre fondo ámbar
 
   --ss-success: hsl(122, 39%, 49%);
   --ss-warn:    hsl(38, 92%, 50%);
@@ -29,21 +32,21 @@
   --ss-font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ss-font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  // Tipografía — escala (rem) · alineada con _tipografia.scss y ajustada a la
-  // densidad de una presentación (no nos sirve el 64 px del display original)
-  --ss-fs-display-lg: 2.5rem;     // 40 px · brand portada
-  --ss-fs-h1:         2.25rem;    // 36 px
-  --ss-fs-h2:         1.625rem;   // 26 px
-  --ss-fs-h3:         1.25rem;    // 20 px
-  --ss-fs-h4:         1.125rem;   // 18 px
-  --ss-fs-body-xl:    1.0625rem;  // 17 px
-  --ss-fs-body-lg:    1rem;       // 16 px
-  --ss-fs-body-md:    0.875rem;   // 14 px
-  --ss-fs-body-sm:    0.8125rem;  // 13 px
-  --ss-fs-label-md:   0.75rem;    // 12 px
-  --ss-fs-label-sm:   0.6875rem;  // 11 px
-  --ss-fs-caption-md: 0.75rem;    // 12 px
-  --ss-fs-code:       0.85em;
+  // Escala para PROYECCIÓN (base 16 px del navegador × factor Reveal ~1.5 en 1080p).
+  // Se diseña para leerse desde 4–6 m de distancia.
+  --ss-fs-display-lg: 4.5rem;    //  72 px base · ~108 px proyectado · portada
+  --ss-fs-h1:         3.5rem;    //  56 px base
+  --ss-fs-h2:         2.75rem;   //  44 px base · ~66 px proyectado · título de slide
+  --ss-fs-h3:         2rem;      //  32 px base · subtítulos
+  --ss-fs-h4:         1.625rem;  //  26 px base · títulos de card
+  --ss-fs-body-xl:    1.5rem;    //  24 px base
+  --ss-fs-body-lg:    1.375rem;  //  22 px base · listas y párrafos principales
+  --ss-fs-body-md:    1.25rem;   //  20 px base · body de cards
+  --ss-fs-body-sm:    1.125rem;  //  18 px base · bloques de código
+  --ss-fs-label-md:   1rem;      //  16 px base
+  --ss-fs-label-sm:   0.9375rem; //  15 px base
+  --ss-fs-caption-md: 1rem;      //  16 px base
+  --ss-fs-code:       0.9em;
 
   --ss-fw-display: 800;
   --ss-fw-heading: 700;
