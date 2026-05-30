@@ -1,0 +1,22 @@
+// =============================================================================
+// COMPONENTS · images — bloques de imágenes (reveal + highlight.js)
+// =============================================================================
+
+.title-block{
+    &__image-wrapper {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    &__image {
+        display: block;
+        margin: var(--ss-space-6) auto 0;
+        inline-size: clamp(8rem, 16vw, 11rem);
+        border-radius: var(--ss-radius-lg);
+        overflow: hidden;
+        max-width: 100%;
+        max-height: 30vh;
+        box-shadow: var(--ss-shadow-md);
+    }
+}

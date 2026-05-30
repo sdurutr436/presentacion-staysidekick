@@ -9,7 +9,8 @@
   --ss-fg: hsl(0, 0%, 22.7451%);
   --ss-fg-soft: hsl(0, 0%, 31.3725%);
   --ss-muted: hsl(0, 0%, 31.3725%);
-  --ss-accent: hsl(47.4419, 64.1791%, 86.8627%);
+  --ss-accent: hsl(0, 0%, 16.8627%);
+  --ss-badge-accent: hsl(47.4419, 64.1791%, 86.8627%);
   --ss-accent-fg: hsl(14.2105, 25.6757%, 29.0196%);
   --ss-success: hsl(122, 39%, 49%);
   --ss-warn: hsl(38, 92%, 50%);
@@ -18,13 +19,13 @@
   --ss-font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --ss-fs-display-lg: 4.5rem;
   --ss-fs-h1: 3.5rem;
-  --ss-fs-h2: 2.75rem;
+  --ss-fs-h2: 2.5rem;
   --ss-fs-h3: 2rem;
   --ss-fs-h4: 1.625rem;
   --ss-fs-body-xl: 1.5rem;
-  --ss-fs-body-lg: 1.375rem;
+  --ss-fs-body-lg: 1.25rem;
   --ss-fs-body-md: 1.25rem;
-  --ss-fs-body-sm: 1.125rem;
+  --ss-fs-body-sm: 0.95rem;
   --ss-fs-label-md: 1rem;
   --ss-fs-label-sm: 0.9375rem;
   --ss-fs-caption-md: 1rem;
@@ -224,7 +225,7 @@ body.reveal-viewport {
   white-space: nowrap;
 }
 .badge--accent {
-  background: var(--ss-accent);
+  background: var(--ss-badge-accent);
   color: var(--ss-accent-fg);
 }
 .badge--outline {
@@ -330,6 +331,22 @@ body.reveal-viewport {
   letter-spacing: 0.25em;
 }
 
+.title-block__image-wrapper {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+.title-block__image {
+  display: block;
+  margin: var(--ss-space-6) auto 0;
+  inline-size: clamp(8rem, 16vw, 11rem);
+  border-radius: var(--ss-radius-lg);
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 30vh;
+  box-shadow: var(--ss-shadow-md);
+}
+
 .quote {
   font-style: italic;
   color: var(--ss-muted);
@@ -339,7 +356,7 @@ body.reveal-viewport {
 }
 
 .reveal pre {
-  box-shadow: var(--ss-shadow-lg);
+  box-shadow: var(--ss-shadow-md);
   border-radius: var(--ss-radius-lg);
   font-size: var(--ss-fs-body-sm);
   line-height: 1.5;
@@ -348,7 +365,7 @@ body.reveal-viewport {
   margin: var(--ss-space-2) 0;
 }
 .reveal pre code {
-  padding: var(--ss-space-4) var(--ss-space-5);
+  padding: var(--ss-space-2) var(--ss-space-3);
   border-radius: var(--ss-radius-lg);
   font-family: var(--ss-font-mono);
   font-size: 0.95em;
