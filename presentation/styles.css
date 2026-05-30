@@ -1,16 +1,16 @@
 @charset "UTF-8";
 :root {
-  --ss-bg: hsl(0, 0%, 16.86%);
-  --ss-bg-deep: hsl(0, 0%, 12.94%);
-  --ss-card: hsl(0, 0%, 20%);
-  --ss-muted-bg: hsl(0, 0%, 27.06%);
-  --ss-border: hsl(0, 0%, 30.98%);
-  --ss-border-strong: hsl(0, 0%, 50%);
-  --ss-fg: hsl(0, 0%, 86.27%);
-  --ss-fg-soft: hsl(0, 0%, 75.29%);
-  --ss-muted: hsl(0, 0%, 62.75%);
-  --ss-accent: hsl(47, 78%, 68%);
-  --ss-accent-fg: hsl(14, 35%, 22%);
+  --ss-bg: hsl(0, 0%, 97.6471%);
+  --ss-bg-deep: hsl(0, 0%, 94.1176%);
+  --ss-card: hsl(0, 0%, 100%);
+  --ss-muted-bg: hsl(0, 0%, 89.0196%);
+  --ss-border: hsl(0, 0.8696%, 45.0980%);
+  --ss-border-strong: hsl(0, 0%, 31.3725%);
+  --ss-fg: hsl(0, 0%, 22.7451%);
+  --ss-fg-soft: hsl(0, 0%, 31.3725%);
+  --ss-muted: hsl(0, 0%, 31.3725%);
+  --ss-accent: hsl(47.4419, 64.1791%, 86.8627%);
+  --ss-accent-fg: hsl(14.2105, 25.6757%, 29.0196%);
   --ss-success: hsl(122, 39%, 49%);
   --ss-warn: hsl(38, 92%, 50%);
   --ss-danger: hsl(0, 41.49%, 63.14%);

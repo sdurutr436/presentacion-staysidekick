@@ -1,28 +1,25 @@
 // =============================================================================
 // SETTINGS · tokens
 // Mapeo 1:1 desde:
-//   - frontend/src/styles/settings/_css-variables.scss (modo oscuro)
+//   - frontend/src/styles/settings/_css-variables.scss (modo claro corporativo)
 //   - frontend/src/styles/settings/_tipografia.scss
 //   - frontend/src/styles/settings/_variables.scss
 // Prefijo --ss-* para no chocar con los tokens del propio reveal.
 // =============================================================================
 
 :root {
-  // Paleta — modo oscuro
-  --ss-bg:            hsl(0, 0%, 16.86%);   // #2B2B2B · --background dark
-  --ss-bg-deep:       hsl(0, 0%, 12.94%);   // #212121 · --sidebar dark
-  --ss-card:          hsl(0, 0%, 20%);      // #333333 · --card dark
-  --ss-muted-bg:      hsl(0, 0%, 27.06%);   // #454545 · --muted dark
-  --ss-border:        hsl(0, 0%, 30.98%);   // #4F4F4F · --border dark
-  --ss-border-strong: hsl(0, 0%, 50%);      // #808080 · --border-strong dark
-  --ss-fg:            hsl(0, 0%, 86.27%);   // #DCDCDC · --foreground dark
-  --ss-fg-soft:       hsl(0, 0%, 75.29%);   // #C0C0C0 · --secondary-foreground
-  --ss-muted:         hsl(0, 0%, 62.75%);   // #A0A0A0 · --muted-foreground
-  // Nota: la claridad 87% del ámbar original (#EFE3BC) lo hace casi blanco en
-  // proyectores. Para que se perciba como dorado/ámbar bajamos la claridad a 68%
-  // y subimos la saturación. El hue se mantiene intacto (identidad corporativa).
-  --ss-accent:        hsl(47, 78%, 68%);   // ~#EDD270 · ámbar visible en proyección
-  --ss-accent-fg:     hsl(14, 35%, 22%);   // oscuro cálido · texto sobre fondo ámbar
+  // Paleta corporativa — modo claro de Stay Sidekick
+  --ss-bg:            hsl(0, 0%, 97.6471%);      // --background
+  --ss-bg-deep:       hsl(0, 0%, 94.1176%);      // --sidebar
+  --ss-card:          hsl(0, 0%, 100%);          // --card
+  --ss-muted-bg:      hsl(0, 0%, 89.0196%);      // --muted
+  --ss-border:        hsl(0, 0.8696%, 45.0980%); // --border
+  --ss-border-strong: hsl(0, 0%, 31.3725%);      // --border-strong
+  --ss-fg:            hsl(0, 0%, 22.7451%);      // --foreground
+  --ss-fg-soft:       hsl(0, 0%, 31.3725%);      // --muted-foreground
+  --ss-muted:         hsl(0, 0%, 31.3725%);      // --muted-foreground
+  --ss-accent:        hsl(47.4419, 64.1791%, 86.8627%); // --accent
+  --ss-accent-fg:     hsl(14.2105, 25.6757%, 29.0196%); // --accent-foreground
 
   --ss-success: hsl(122, 39%, 49%);
   --ss-warn:    hsl(38, 92%, 50%);
