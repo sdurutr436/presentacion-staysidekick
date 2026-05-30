@@ -452,73 +452,90 @@ body.reveal-viewport {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: var(--ss-space-2) 0;
+  margin: var(--ss-space-4) 0 0;
   padding: 0;
 }
 
 .reveal .mermaid svg,
 .reveal pre.mermaid svg {
-  max-width: 100%;
-  max-height: 95vh;
-  width: auto !important;
+  width: 100% !important;
   height: auto !important;
+  max-width: 100%;
+  max-height: 80vh;
 }
 
 .reveal .mermaid .nodeLabel,
 .reveal .mermaid .edgeLabel {
   font-family: var(--ss-font-sans) !important;
-  font-size: 114px !important;
   font-weight: 500 !important;
 }
 .reveal .mermaid .nodeLabel .mm-node {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  min-width: 66rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  min-width: 300px;
 }
 .reveal .mermaid .nodeLabel .mm-node img {
-  width: 396px;
-  height: 396px;
+  width: 300px;
+  height: 300px;
   object-fit: contain;
   display: block;
 }
 .reveal .mermaid .nodeLabel .mm-role {
-  font-size: 78px;
-  letter-spacing: 0.08em;
+  font-size: 18px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ss-muted);
   line-height: 1;
 }
 .reveal .mermaid .nodeLabel .mm-name {
-  font-size: 108px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--ss-fg);
-  line-height: 1.1;
+  line-height: 1.15;
   text-align: center;
+  white-space: nowrap;
+}
+.reveal .mermaid .edgeLabel,
+.reveal .mermaid .edgeLabel p,
+.reveal .mermaid .edgeLabel span {
+  background-color: var(--ss-card) !important;
+  color: var(--ss-fg) !important;
+}
+.reveal .mermaid .edgeLabel foreignObject > div,
+.reveal .mermaid .edgeLabel p {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid var(--ss-border);
+  border-radius: 999px;
+  background-color: var(--ss-card) !important;
+  color: var(--ss-fg) !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  line-height: 1.25;
+  white-space: nowrap;
 }
 .reveal .mermaid .edgeLabel rect {
   fill: var(--ss-card) !important;
-  stroke: var(--ss-border) !important;
-  stroke-width: 1px !important;
-}
-.reveal .mermaid .edgeLabel p {
-  background-color: var(--ss-card) !important;
-  color: var(--ss-fg) !important;
-  font-size: 108px !important;
-  font-weight: 700 !important;
+  stroke: none !important;
 }
 .reveal .mermaid .cluster rect {
-  fill: hsla(47, 64%, 87%, 0.03) !important;
+  fill: hsla(0, 0%, 0%, 0.02) !important;
   stroke: var(--ss-border) !important;
   stroke-dasharray: 4 3 !important;
 }
 .reveal .mermaid .cluster-label .nodeLabel {
   color: var(--ss-accent) !important;
   font-weight: 700 !important;
-  font-size: 11px !important;
+  font-size: 18px !important;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+.reveal .mermaid.mermaid--traffic .cluster rect {
+  fill: none !important;
+  stroke: none !important;
 }
 .reveal .mermaid.mermaid--traffic .node rect,
 .reveal .mermaid.mermaid--traffic .node polygon,
@@ -546,14 +563,15 @@ body.reveal-viewport {
   stroke-width: 2.5px !important;
 }
 .reveal .mermaid.mermaid--traffic .edgePath .flow-base,
-.reveal .mermaid.mermaid--traffic .edgePath .path {
+.reveal .mermaid.mermaid--traffic .edgePath .path,
+.reveal .mermaid.mermaid--traffic .flowchart-link {
   stroke: #111111 !important;
-  stroke-width: 2.5px !important;
+  stroke-width: 3px !important;
   fill: none !important;
 }
 .reveal .mermaid.mermaid--traffic .edgePath .flow-overlay {
-  stroke: var(--ss-badge-accent) !important;
-  stroke-width: 3.5px !important;
+  stroke: var(--ss-accent) !important;
+  stroke-width: 4px !important;
   stroke-linecap: round;
   fill: none !important;
   stroke-dasharray: 18 220;
@@ -561,7 +579,9 @@ body.reveal-viewport {
   animation: ss-flow-run 6.4s linear infinite;
   animation-delay: var(--flow-delay, 0s);
 }
-.reveal .mermaid.mermaid--traffic .marker path {
+.reveal .mermaid.mermaid--traffic .marker,
+.reveal .mermaid.mermaid--traffic .marker path,
+.reveal .mermaid.mermaid--traffic marker path {
   fill: #111111 !important;
   stroke: #111111 !important;
 }

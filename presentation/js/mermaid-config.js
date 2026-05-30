@@ -1,7 +1,6 @@
 // =============================================================================
 // MERMAID · configuración de tema
-// Paleta corporativa Stay-Sidekick — modo oscuro + acento ámbar fijo (#EFE3BC).
-// Espejo de los tokens definidos en scss/settings/_tokens.scss.
+// Paleta corporativa Stay-Sidekick — MODO CLARO (espejo de scss/settings/_tokens.scss).
 // =============================================================================
 
 export const mermaidConfig = {
@@ -11,34 +10,38 @@ export const mermaidConfig = {
   fontFamily: 'Archivo, sans-serif',
   themeVariables: {
     fontFamily: 'Archivo, sans-serif',
-    fontSize: '13px',
+    fontSize: '24px',
     background: 'transparent',
 
-    primaryColor: '#EFE3BC',
-    primaryTextColor: '#5D423A',
-    primaryBorderColor: '#EFE3BC',
+    primaryColor: '#ffffff',
+    primaryTextColor: '#3a3a3a',
+    primaryBorderColor: '#737373',
 
-    secondaryColor: '#333333',
-    secondaryTextColor: '#DCDCDC',
-    secondaryBorderColor: '#4F4F4F',
+    secondaryColor: '#ffffff',
+    secondaryTextColor: '#3a3a3a',
+    secondaryBorderColor: '#737373',
 
-    tertiaryColor: '#212121',
-    tertiaryTextColor: '#DCDCDC',
-    tertiaryBorderColor: '#4F4F4F',
+    tertiaryColor: '#ffffff',
+    tertiaryTextColor: '#3a3a3a',
+    tertiaryBorderColor: '#737373',
 
-    mainBkg: '#333333',
-    nodeBorder: '#4F4F4F',
-    clusterBkg: 'rgba(239, 227, 188, 0.03)',
-    clusterBorder: '#4F4F4F',
+    mainBkg: '#ffffff',
+    nodeBorder: '#737373',
+    clusterBkg: 'rgba(0, 0, 0, 0.02)',
+    clusterBorder: '#737373',
 
-    lineColor: '#EFE3BC',
-    textColor: '#DCDCDC',
-    edgeLabelBackground: '#2B2B2B',
+    // Línea oscura para que se vea sobre fondo blanco (era #EFE3BC, invisible).
+    lineColor: '#333333',
+    textColor: '#3a3a3a',
+    // Fondo claro de las etiquetas de arista (era #2B2B2B, oscuro y feo).
+    edgeLabelBackground: '#ffffff',
   },
   flowchart: {
     curve: 'linear',
-    useMaxWidth: true,
+    useMaxWidth: false,
     htmlLabels: true,
-    padding: 10,
+    padding: 8,
+    nodeSpacing: 300, // separación vertical entre filas (LR) → estira en alto
+    rankSpacing: 70,  // separación horizontal entre columnas
   },
 };
