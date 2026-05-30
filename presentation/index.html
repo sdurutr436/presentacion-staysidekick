@@ -51,10 +51,10 @@
           <section>
             <em class="kicker">Origen <span class="kicker__nav">· 1/3 ↓</span></em>
             <h2>¿Por qué Stay-Sidekick?</h2>
-            <ul>
-              <li class="fragment"><strong>2 años y 5 meses</strong> trabajando de recepcionista en una gestora de pisos turísticos.</li>
-              <li class="fragment">Cada turno arrancaba y terminaba <strong>saltando entre el PMS, Google y Excel</strong>.</li>
-              <li class="fragment">El producto nace de ese diagnóstico: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
+            <ul class="fragment">
+              <li><strong>2 años y 5 meses</strong> trabajando de recepcionista en una gestora de pisos turísticos.</li>
+              <li>Cada turno arrancaba y terminaba <strong>saltando entre el PMS, Google y Excel</strong>.</li>
+              <li>El producto nace de ese diagnóstico: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
             </ul>
             <aside class="notes">
               La idea no es un ejercicio académico, viene de dos años y medio de recepción real. Detecté
@@ -65,27 +65,18 @@
 
           <section>
             <em class="kicker">Origen <span class="kicker__nav">· 2/3 ↓</span></em>
-            <h2>Tres iteraciones antes del TFG</h2>
-            <div class="grid grid--3">
-              <article class="card card--h fragment">
-                <h4 class="card__title">v1 · JavaFX</h4>
+            <h2>Dos iteraciones antes del final</h2>
+            <div class="grid grid--stack">
+              <article class="card fragment">
+                <h4 class="card__title">v1 · JavaFX - Prototipo verano</h4>
                 <div class="card__body">
-                  <p>Prototipo de escritorio.</p>
-                  <p>Nunca salió del laboratorio.</p>
+                  <p>Prototipo de escritorio con 1 sola herramienta, el generador de correos. Solo funcionaba con <code>.csv</code></p>
                 </div>
               </article>
-              <article class="card card--h fragment">
-                <h4 class="card__title">v2 · MERN</h4>
+              <article class="card fragment">
+                <h4 class="card__title">v2 · MERN - Prototipo navidad</h4>
                 <div class="card__body">
-                  <p>Mongo + Express + React + Node.</p>
-                  <p><strong>Hoy sigue en uso real</strong> en la empresa.</p>
-                </div>
-              </article>
-              <article class="card card--h fragment">
-                <h4 class="card__title">v3 · Stay-Sidekick</h4>
-                <div class="card__body">
-                  <p>Full-stack multi-tenant.</p>
-                  <p>Producción en stay-sidekick.com.</p>
+                  <p>Posibilidad de añadir una base de datos con todos los apartamentos para el generador de correos y el sincronizador de contactos. Solo era necesario subir un <code>.csv</code>.</p>
                 </div>
               </article>
             </div>
@@ -99,10 +90,17 @@
           <section>
             <em class="kicker">Origen <span class="kicker__nav">· 3/3 →</span></em>
             <h2>Capa <span class="badge badge--accent">satélite</span> · no sustituto</h2>
-            <ul>
-              <li class="fragment">Convive con Smoobu, Beds24, KrossBooking…</li>
-              <li class="fragment">Cubre <strong>lo que el PMS no resuelve</strong>: mapa de calor, check-in tardío, vault de comunicaciones, sincronización Google.</li>
-              <li class="fragment">Arquitectura <strong>multi-tenant</strong> real con aislamiento por <code>empresa_id</code>.</li>
+            <ul class="fragment">
+              <li>Convive con Smoobu, Beds24, KrossBooking y otros PMS</li>
+              <li>Cubre <strong>lo que el PMS no resuelve automáticamente o lo hace de forma limitada</strong>:
+                <ul>
+                  <li class="list_inside">Mapa de calor</li>
+                  <li class="list_inside">Check-in tardío</li>
+                  <li class="list_inside">Vault de comunicaciones</li>
+                  <li class="list_inside">Sincronización Google</li>
+                </ul>
+              </li>
+              <li>Arquitectura <strong>multi-tenant</strong> real con aislamiento por <code>empresa_id</code>.</li>
             </ul>
             <aside class="notes">
               Stay-Sidekick no quiere sustituir al PMS, lo complementa. Cubre el hueco operativo: mapa
@@ -119,6 +117,32 @@
              PENDIENTE: insertar aquí el esquema de arquitectura (imagen).
              ───────────────────────────────────────────────────────────────── -->
         <section>
+          <em class="kicker">Stack <span class="kicker__nav">· flujo L→R</span></em>
+          <h2>Topología runtime y rutas</h2>
+          <pre class="mermaid mermaid--traffic">
+flowchart LR
+  client["<div class='mm-node'><img src='assets/animations/telecommuting.gif' alt='Cliente' /><span class='mm-role'>ACTOR</span><span class='mm-name'>Cliente</span></div>"]:::external
+  nginx["<div class='mm-node'><img src='assets/animations/hotspot.gif' alt='Nginx' /><span class='mm-role'>CONTENEDOR</span><span class='mm-name'>Nginx :80</span></div>"]:::gateway
+  web["<div class='mm-node'><img src='assets/animations/website.gif' alt='Web' /><span class='mm-role'>CONTENEDOR</span><span class='mm-name'>/web · 11ty</span></div>"]:::svc
+  frontend["<div class='mm-node'><img src='assets/animations/ux-design.gif' alt='Frontend' /><span class='mm-role'>CONTENEDOR</span><span class='mm-name'>/frontend · Angular</span></div>"]:::svc
+  backend["<div class='mm-node'><img src='assets/animations/backend.gif' alt='Backend' /><span class='mm-role'>CONTENEDOR</span><span class='mm-name'>/backend · Flask</span></div>"]:::api
+  db["<div class='mm-node'><img src='assets/animations/database.gif' alt='PostgreSQL' /><span class='mm-role'>CONTENEDOR</span><span class='mm-name'>PostgreSQL</span></div>"]:::db
+
+  client -->|HTTP :80| nginx
+  nginx -->|/| web
+  web -->|respuesta| nginx
+  nginx -->|/menu| frontend
+  frontend -->|/api| backend
+  backend -->|SQL| db
+  db -->|resultados| backend
+  backend -->|JSON| frontend
+
+  classDef external fill:#ffffff,stroke:#111111,stroke-width:2.5px,color:#111111;
+  classDef gateway fill:#ffffff,stroke:#c99613,stroke-width:2.5px,color:#111111;
+  classDef svc fill:#ffffff,stroke:#4d4d4d,stroke-width:2.5px,color:#111111;
+  classDef api fill:#ffffff,stroke:#2f5d7c,stroke-width:2.5px,color:#111111;
+  classDef db fill:#ffffff,stroke:#386d4a,stroke-width:2.5px,color:#111111;
+          </pre>
           <aside class="notes">
             Esta es la topología de cinco contenedores. El cliente solo ve el puerto 80 del Nginx
             externo, que reparte: barra api al backend Flask, barra menú a Angular, barra raíz al

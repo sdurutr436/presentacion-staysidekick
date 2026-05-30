@@ -18,7 +18,7 @@
   --ss-fg:            hsl(0, 0%, 22.7451%);      // --foreground
   --ss-fg-soft:       hsl(0, 0%, 31.3725%);      // --muted-foreground
   --ss-muted:         hsl(0, 0%, 31.3725%);      // --muted-foreground
-  --ss-accent:        hsl(0, 0%, 16.8627%);      // --accent
+  --ss-accent:        hsl(43, 82%, 45%);         // --accent visible en proyeccion
   --ss-badge-accent:  hsl(47.4419, 64.1791%, 86.8627%); // --accent for badges
   --ss-accent-fg:     hsl(14.2105, 25.6757%, 29.0196%); // --accent-foreground
 
@@ -36,7 +36,7 @@
   --ss-fs-h1:         3.5rem;    //  56 px base
   --ss-fs-h2:         2.5rem;   //  44 px base · ~66 px proyectado · título de slide
   --ss-fs-h3:         2rem;      //  32 px base · subtítulos
-  --ss-fs-h4:         1.625rem;  //  26 px base · títulos de card
+  --ss-fs-h4:         1.5rem;  //  26 px base · títulos de card
   --ss-fs-body-xl:    1.5rem;    //  24 px base
   --ss-fs-body-lg:    1.25rem;  //  22 px base · listas y párrafos principales
   --ss-fs-body-md:    1.25rem;   //  20 px base · body de cards

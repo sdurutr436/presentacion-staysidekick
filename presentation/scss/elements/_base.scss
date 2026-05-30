@@ -90,5 +90,33 @@
         font-size: 0.65em;
       }
     }
+
+    // Listas anidadas: sin rombo decorativo y con sangria limpia.
+    ul,
+    ol {
+      margin-top: var(--ss-space-1);
+      margin-bottom: 0;
+      padding-left: var(--ss-space-5);
+
+      li {
+        padding-left: 0;
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.list_inside {
+  padding-left: var(--ss-space-4);
+
+  li {
+    list-style: none;
+
+    &::before {
+      content: none;
+    }
   }
 }

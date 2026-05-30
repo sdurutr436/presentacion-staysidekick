@@ -9,7 +9,7 @@
   --ss-fg: hsl(0, 0%, 22.7451%);
   --ss-fg-soft: hsl(0, 0%, 31.3725%);
   --ss-muted: hsl(0, 0%, 31.3725%);
-  --ss-accent: hsl(0, 0%, 16.8627%);
+  --ss-accent: hsl(43, 82%, 45%);
   --ss-badge-accent: hsl(47.4419, 64.1791%, 86.8627%);
   --ss-accent-fg: hsl(14.2105, 25.6757%, 29.0196%);
   --ss-success: hsl(122, 39%, 49%);
@@ -21,7 +21,7 @@
   --ss-fs-h1: 3.5rem;
   --ss-fs-h2: 2.5rem;
   --ss-fs-h3: 2rem;
-  --ss-fs-h4: 1.625rem;
+  --ss-fs-h4: 1.5rem;
   --ss-fs-body-xl: 1.5rem;
   --ss-fs-body-lg: 1.25rem;
   --ss-fs-body-md: 1.25rem;
@@ -171,6 +171,30 @@ body.reveal-viewport {
   color: var(--ss-accent);
   font-size: 0.65em;
 }
+.reveal ul ul,
+.reveal ul ol {
+  margin-top: var(--ss-space-1);
+  margin-bottom: 0;
+  padding-left: var(--ss-space-5);
+}
+.reveal ul ul li,
+.reveal ul ol li {
+  padding-left: 0;
+}
+.reveal ul ul li::before,
+.reveal ul ol li::before {
+  content: none;
+}
+
+.list_inside {
+  padding-left: var(--ss-space-4);
+}
+.list_inside li {
+  list-style: none;
+}
+.list_inside li::before {
+  content: none;
+}
 
 .grid {
   display: grid;
@@ -185,6 +209,18 @@ body.reveal-viewport {
 }
 .grid--4 {
   grid-template-columns: repeat(4, 1fr);
+}
+.grid--stack {
+  grid-template-columns: 1fr;
+  max-inline-size: 48rem;
+  margin-inline: auto;
+  gap: var(--ss-space-3);
+}
+.grid--stack .card {
+  padding: var(--ss-space-3) var(--ss-space-4);
+}
+.grid--stack .card__title {
+  font-size: var(--ss-fs-h3);
 }
 
 .kicker {
@@ -423,7 +459,7 @@ body.reveal-viewport {
 .reveal .mermaid svg,
 .reveal pre.mermaid svg {
   max-width: 100%;
-  max-height: 58vh;
+  max-height: 95vh;
   width: auto !important;
   height: auto !important;
 }
@@ -431,15 +467,46 @@ body.reveal-viewport {
 .reveal .mermaid .nodeLabel,
 .reveal .mermaid .edgeLabel {
   font-family: var(--ss-font-sans) !important;
-  font-size: 12px !important;
+  font-size: 114px !important;
   font-weight: 500 !important;
 }
+.reveal .mermaid .nodeLabel .mm-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 66rem;
+}
+.reveal .mermaid .nodeLabel .mm-node img {
+  width: 396px;
+  height: 396px;
+  object-fit: contain;
+  display: block;
+}
+.reveal .mermaid .nodeLabel .mm-role {
+  font-size: 78px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ss-muted);
+  line-height: 1;
+}
+.reveal .mermaid .nodeLabel .mm-name {
+  font-size: 108px;
+  font-weight: 700;
+  color: var(--ss-fg);
+  line-height: 1.1;
+  text-align: center;
+}
 .reveal .mermaid .edgeLabel rect {
-  fill: var(--ss-bg) !important;
+  fill: var(--ss-card) !important;
+  stroke: var(--ss-border) !important;
+  stroke-width: 1px !important;
 }
 .reveal .mermaid .edgeLabel p {
-  background-color: var(--ss-bg) !important;
+  background-color: var(--ss-card) !important;
   color: var(--ss-fg) !important;
+  font-size: 108px !important;
+  font-weight: 700 !important;
 }
 .reveal .mermaid .cluster rect {
   fill: hsla(47, 64%, 87%, 0.03) !important;
@@ -452,4 +519,63 @@ body.reveal-viewport {
   font-size: 11px !important;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+.reveal .mermaid.mermaid--traffic .node rect,
+.reveal .mermaid.mermaid--traffic .node polygon,
+.reveal .mermaid.mermaid--traffic .node path {
+  fill: #ffffff !important;
+}
+.reveal .mermaid.mermaid--traffic .node.external rect {
+  stroke: #111111 !important;
+  stroke-width: 2.5px !important;
+}
+.reveal .mermaid.mermaid--traffic .node.gateway rect {
+  stroke: #c99613 !important;
+  stroke-width: 2.5px !important;
+}
+.reveal .mermaid.mermaid--traffic .node.svc rect {
+  stroke: #4d4d4d !important;
+  stroke-width: 2.5px !important;
+}
+.reveal .mermaid.mermaid--traffic .node.api rect {
+  stroke: #2f5d7c !important;
+  stroke-width: 2.5px !important;
+}
+.reveal .mermaid.mermaid--traffic .node.db rect {
+  stroke: #386d4a !important;
+  stroke-width: 2.5px !important;
+}
+.reveal .mermaid.mermaid--traffic .edgePath .flow-base,
+.reveal .mermaid.mermaid--traffic .edgePath .path {
+  stroke: #111111 !important;
+  stroke-width: 2.5px !important;
+  fill: none !important;
+}
+.reveal .mermaid.mermaid--traffic .edgePath .flow-overlay {
+  stroke: var(--ss-badge-accent) !important;
+  stroke-width: 3.5px !important;
+  stroke-linecap: round;
+  fill: none !important;
+  stroke-dasharray: 18 220;
+  stroke-dashoffset: 240;
+  animation: ss-flow-run 6.4s linear infinite;
+  animation-delay: var(--flow-delay, 0s);
+}
+.reveal .mermaid.mermaid--traffic .marker path {
+  fill: #111111 !important;
+  stroke: #111111 !important;
+}
+
+@keyframes ss-flow-run {
+  from {
+    stroke-dashoffset: 240;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal .mermaid.mermaid--traffic .edgePath .flow-overlay {
+    animation: none;
+  }
 }

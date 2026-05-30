@@ -36,7 +36,7 @@ export const mermaidConfig = {
     edgeLabelBackground: '#2B2B2B',
   },
   flowchart: {
-    curve: 'basis',
+    curve: 'linear',
     useMaxWidth: true,
     htmlLabels: true,
     padding: 10,

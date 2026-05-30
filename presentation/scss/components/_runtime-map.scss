@@ -1,0 +1,71 @@
+// =============================================================================
+// COMPONENTS · runtime-map — esquema compacto de contenedores (sin mermaid)
+// =============================================================================
+
+.runtime-map {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-3);
+}
+
+.runtime-map__lane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ss-space-2);
+}
+
+.runtime-map__node {
+  margin: 0;
+  width: 8.2rem;
+  border: 1px solid var(--ss-border);
+  border-radius: var(--ss-radius-md);
+  background: var(--ss-card);
+  text-align: center;
+  padding: var(--ss-space-2);
+}
+
+.runtime-map__node--gateway {
+  border-color: var(--ss-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in hsl, var(--ss-accent) 40%, transparent);
+}
+
+.runtime-map__node img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.runtime-map__node figcaption {
+  margin-top: var(--ss-space-1);
+  font-size: 0.68em;
+  line-height: 1.2;
+  color: var(--ss-fg);
+}
+
+.runtime-map__arrow {
+  color: var(--ss-accent);
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.runtime-map__flows {
+  margin: var(--ss-space-1) auto 0;
+  width: fit-content;
+  font-size: 0.62em;
+  color: var(--ss-muted);
+}
+
+.runtime-map__flows li {
+  margin-bottom: var(--ss-space-1);
+}
+
+@media (max-width: 1200px) {
+  .runtime-map__lane {
+    flex-wrap: wrap;
+  }
+
+  .runtime-map__arrow {
+    display: none;
+  }
+}
