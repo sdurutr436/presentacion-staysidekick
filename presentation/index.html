@@ -25,7 +25,7 @@
         <!-- ═══════════════════════════════════════════════════════════════════
              1 · PORTADA
              ═══════════════════════════════════════════════════════════════════ -->
-        <section data-background-gradient="linear-gradient(135deg, #FFFFFF 0%, # 100%)">
+        <section data-background-gradient="linear-gradient(135deg, #d19c15 -99%, #FFFFFF 90%)">
           <div class="title-block">
             <h1 class="title-block__brand">Stay-Sidekick</h1>
             <h2 class="title-block__sub">
@@ -52,9 +52,9 @@
             <em class="kicker">Origen <span class="kicker__nav">· 1/3 ↓</span></em>
             <h2>¿Por qué Stay-Sidekick?</h2>
             <ul class="fragment">
-              <li><strong>2 años y 5 meses</strong> trabajando de recepcionista en una gestora de pisos turísticos.</li>
-              <li>Cada turno arrancaba y terminaba <strong>saltando entre el PMS, Google y Excel</strong>.</li>
-              <li>El producto nace de ese diagnóstico: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
+              <li><strong>2 años y 5 meses</strong> trabajando de recepcionista en una empresa gestora de alojamientos, unidades y pisos turísticos.</li>
+              <li>Cada turno arrancaba y terminaba <strong>saltando entre el PMS, el sistema de comunicación, plataformas de reservas, los distintos servicios de Google y distintas hojas de cálculo</strong>.</li>
+              <li>El producto nace de ese diagnóstico y necesidades: <em>no falta un PMS más, falta lo que rodea al PMS</em>.</li>
             </ul>
             <aside class="notes">
               La idea no es un ejercicio académico, viene de dos años y medio de recepción real. Detecté
@@ -117,8 +117,8 @@
              PENDIENTE: insertar aquí el esquema de arquitectura (imagen).
              ───────────────────────────────────────────────────────────────── -->
         <section>
-          <em class="kicker">Stack <span class="kicker__nav">· flujo L→R</span></em>
-          <h2>Topología runtime y rutas</h2>
+          <em class="kicker">Stack</em>
+          <h2>Rutas y contenedores</h2>
           <pre class="mermaid mermaid--traffic">
 flowchart LR
   client["<div class='mm-node'><img src='assets/animations/telecommuting.gif' alt='Cliente' /><span class='mm-role'>ACTOR</span><span class='mm-name'>Cliente</span></div>"]:::external
@@ -132,6 +132,7 @@ flowchart LR
   nginx -->|/| web
   web -->|respuesta| nginx
   nginx -->|/menu| frontend
+  nginx -->|JSON| backend
   frontend -->|/api| backend
   backend -->|SQL| db
   db -->|resultados| backend
@@ -146,7 +147,8 @@ flowchart LR
           <aside class="notes">
             Esta es la topología de cinco contenedores. El cliente solo ve el puerto 80 del Nginx
             externo, que reparte: barra api al backend Flask, barra menú a Angular, barra raíz al
-            sitio 11ty. Detrás, Postgres. Todo dentro de una red Docker privada.
+            sitio 11ty. Detrás, Postgres. Todo dentro de una red Docker privada. Tanto en Railway 
+            como en el despliegue local.
           </aside>
         </section>
 
@@ -162,14 +164,14 @@ flowchart LR
                 <h4 class="card__title">Angular 21 → <code>/menu</code></h4>
                 <div class="card__body">
                   <p>Panel privado: estado complejo, formularios densos, guards, signals.</p>
-                  <p>Tipado fuerte y arquitectura mantenible a 3 años vista.</p>
+                  <p>Tipado fuerte y arquitectura mantenible.</p>
                 </div>
               </article>
               <article class="card">
                 <h4 class="card__title">11ty → <code>/</code></h4>
                 <div class="card__body">
                   <p>Landing, legales, blog, 404. Contenido casi 100 % estático.</p>
-                  <p>Una SPA aquí sería <em>over-engineering</em>: peor SEO y peor Lighthouse.</p>
+                  <p>Una SPA aquí sería peor SEO.</p>
                 </div>
               </article>
             </div>
@@ -183,11 +185,11 @@ flowchart LR
           <section>
             <em class="kicker">Frontend <span class="kicker__nav">· 2/4 ↓</span></em>
             <h2>SCSS compartido entre Angular y 11ty</h2>
-            <ul>
-              <li class="fragment">Ambos compilan desde <code>frontend/src/styles/</code>.</li>
-              <li class="fragment">Arquitectura <strong>ITCSS</strong> — settings → tools → generic → elements → layout → components → utilities.</li>
-              <li class="fragment">Nomenclatura <strong>BEM</strong> — sin colisiones, sin duplicados.</li>
-              <li class="fragment">Una sola fuente de verdad cromática para ambos frontends.</li>
+            <ul class="fragment">
+              <li >Ambos compilan desde <code>frontend/src/styles/</code>.</li>
+              <li>Arquitectura <strong>ITCSS</strong> — settings → tools → generic → elements → layout → components → utilities.</li>
+              <li>Nomenclatura <strong>BEM</strong> — sin colisiones, sin duplicados.</li>
+              <li>Una sola fuente de verdad cromática para ambos frontends.</li>
             </ul>
             <aside class="notes">
               Como Angular y 11ty comparten estilos, no hay dos sistemas: hay uno solo. ITCSS marca el
@@ -238,6 +240,7 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
   }
 });
             </code></pre>
+            <p class="u-muted">Este evento es necesario ya que permite la sincronización del tema entre tecnologías.</p>
             <aside class="notes">
               Lo bonito: si cambio el tema en el panel y tengo la landing abierta en otra pestaña, la
               landing también cambia. El evento storage se dispara solo en pestañas distintas a la que
@@ -261,11 +264,13 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
                 <li>Tipografía única: <strong>Archivo</strong> variable, pesos 400-800.</li>
               </ul>
               <article class="card fragment">
-                <h4 class="card__title">Tokens semánticos</h4>
                 <div class="card__body">
-                  <p><code>--background</code> · <code>--foreground</code></p>
-                  <p><code>--card</code> · <code>--primary</code></p>
-                  <p><code>--border</code> · <code>--accent</code></p>
+                  <p><code>--background</code></p> 
+                  <p><code>--foreground</code></p>
+                  <p><code>--card</code></p>
+                  <p><code>--primary</code></p>
+                  <p><code>--border</code></p>
+                  <p><code>--accent</code></p>
                   <p class="u-muted">El toggle <code>.dark</code> reescribe los tokens; los componentes no se enteran.</p>
                 </div>
               </article>
@@ -285,10 +290,12 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
               <div class="stat"><span class="stat__n">9</span><span class="stat__l">pantallas auditadas WAVE</span></div>
               <div class="stat"><span class="stat__n">4 px</span><span class="stat__l">cuadrícula base</span></div>
             </div>
-            <ul class="u-mt-8">
-              <li class="fragment">Auditoría <strong>WAVE</strong> + <strong>Lighthouse</strong> publicada en la memoria técnica.</li>
-              <li class="fragment">Confirmaciones en acciones destructivas (prevención de errores).</li>
-              <li class="fragment">Feedback explícito: spinners, toasts accionables, estados vacíos.</li>
+            <br>
+            <ul class="fragment">
+              <li>Auditoría <strong>WAVE</strong> + <strong>Lighthouse</strong> publicada en la memoria técnica sobre pantallas en color principal.</li>
+              <li>Confirmaciones en acciones destructivas (prevención de errores).</li>
+              <li>Feedback explícito: toasts accionables, estados vacíos.</li>
+              <li> Totalmente accesible por teclado y con lectores de pantalla.</li>
             </ul>
             <aside class="notes">
               Accesibilidad como dato, no como adjetivo. WCAG 2.1 AA y auditorías WAVE y Lighthouse en
@@ -305,11 +312,12 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
           <section>
             <em class="kicker">Backend <span class="kicker__nav">· 1/3 ↓</span></em>
             <h2>Flask · blueprints · multi-tenant</h2>
-            <ul>
-              <li class="fragment">Flask + Gunicorn, <strong>blueprints modulares</strong> (auth, perfil, vault, heatmap, apartamentos…).</li>
-              <li class="fragment">¿Por qué Flask? <em>Microframework</em>: control fino sobre middlewares, sin magia.</li>
-              <li class="fragment">JWT HS256 + CSRF double-submit + rate limit + CORS por orígenes.</li>
-              <li class="fragment">Aislamiento por <code>empresa_id</code> en <strong>todas</strong> las queries.</li>
+            <ul class="fragment">
+              <li>Flask + Gunicorn, <strong>blueprints modulares</strong> (auth, perfil, vault, heatmap, apartamentos…).</li>
+              <li>¿Por qué Flask? <em>Microframework</em>: control fino sobre middlewares, sin magia.</li>
+              <li>JWT HS256: incluye la autenticación del usuario, su rol, el id de la empresa a la que pertenece, entre otros.</li>
+              <li>CSRF double-submit + rate limit + CORS por orígenes.</li>
+              <li>Aislamiento por <code>empresa_id</code> en <strong>todas</strong> las queries.</li>
             </ul>
             <aside class="notes">
               El backend es Flask. Microframework para tener control fino: yo decido qué middleware
@@ -320,7 +328,7 @@ window.addEventListener('storage', (event: StorageEvent) =&gt; {
 
           <section>
             <em class="kicker">Backend <span class="kicker__nav">· 2/3 ↓</span></em>
-            <h2>Marshmallow como frontera contractual</h2>
+            <h2>Marshmallow como frontera</h2>
             <pre><code class="language-python" data-trim data-noescape>
 class ApartamentoCreateSchema(Schema):
     nombre    = fields.String(required=True, validate=validate.Length(min=1, max=200))
@@ -341,7 +349,7 @@ class ApartamentoCreateSchema(Schema):
             <aside class="notes">
               No se llama DTO en el código, pero cumple ese rol: cada endpoint tiene su schema de
               Marshmallow que sanitiza primero con nh3 y valida después. El blueprint nunca recibe un
-              dict crudo de Flask. Frontera contractual entre HTTP y negocio.
+              diccionario crudo de Flask. Frontera contractual entre HTTP y negocio.
             </aside>
           </section>
 
@@ -353,7 +361,7 @@ class ApartamentoCreateSchema(Schema):
                 <h4 class="card__title">Cifrado simétrico Fernet</h4>
                 <div class="card__body">
                   <p>Las <strong>API keys</strong> del PMS y del proveedor de IA viven en BD <em>cifradas</em> con clave maestra.</p>
-                  <p class="u-muted"><code>FERNET_KEY</code> fuera del repo, en el entorno.</p>
+                  <p><code>FERNET_KEY</code> fuera del repo, en el entorno.</p>
                 </div>
               </article>
               <article class="card fragment">
@@ -364,11 +372,10 @@ class ApartamentoCreateSchema(Schema):
                 </div>
               </article>
             </div>
-            <p class="fragment u-muted u-mt-2">RGPD no como póster en la pared — como decisión arquitectónica.</p>
+            <p class="fragment u-muted u-mt-2">Todo con el fin de cumplir con el RGPD y LOPDGDD.</p>
             <aside class="notes">
-              Y la decisión más curiosa del backend: los datos de huéspedes nunca tocan la base de
-              datos. Se procesan en memoria y se evaporan. RGPD por diseño. Y lo poco sensible que
-              persiste, como las API keys, va cifrado con Fernet.
+              Los datos de huéspedes nunca tocan la base de datos. Se procesan en memoria y se evaporan. Busca cumplir con el Reglamento General de Protección de Datos y la Ley Orgánica de Protección de Datos y Garantía de Derechos Digitales por diseño. Y lo poco sensible que persiste, va cifrado con Fernet.
+              (PII personal identifiable information, información de identificación personal: nombres, direcciones, teléfonos, etc.)
             </aside>
           </section>
         </section>
@@ -379,10 +386,10 @@ class ApartamentoCreateSchema(Schema):
         <section>
           <section>
             <em class="kicker">DevOps <span class="kicker__nav">· 1/3 ↓</span></em>
-            <h2>En realidad hay <span class="badge badge--accent">dos</span> Nginx</h2>
+            <h2>Existen <span class="badge badge--accent">dos</span> capas de Nginx</h2>
             <div class="grid grid--2">
               <article class="card fragment">
-                <h4 class="card__title">Nginx externo · <code>./nginx</code></h4>
+                <h4 class="card__title">Los Nginx externos en <code>./nginx</code></h4>
                 <div class="card__body">
                   <p>Reverse proxy. Decide qué prefijo va a qué contenedor.</p>
                   <p>Aplica <strong>cabeceras de seguridad</strong> globales (CSP, HSTS, X-Frame-Options).</p>
@@ -422,8 +429,8 @@ add_header Content-Security-Policy "
             </code></pre>
             <ul class="fragment">
               <li>El 11ty inyecta <strong>scripts inline</strong> mínimos (toggle de tema, anti-FOUC).</li>
-              <li>Opción A — <code>'unsafe-inline'</code>. Rechazada: rompe el modelo de amenaza.</li>
-              <li>Opción B — <strong>hashear cada script</strong> y declararlo en la CSP. <em>Hecho</em>.</li>
+              <li>Esto provoca conflictos con la CSP estricta.</li>
+              <li>Solución: hashear los scripts en sha256 y declararlos en la policy.</li>
             </ul>
             <aside class="notes">
               La CSP estricta y el 11ty chocaron de frente. El 11ty inyecta dos scripts inline para el
@@ -467,11 +474,18 @@ location /api/ {
           <div class="grid grid--3">
             <div class="stat"><span class="stat__n">92</span><span class="stat__l">tests backend · pytest</span></div>
             <div class="stat"><span class="stat__n">297</span><span class="stat__l">tests frontend · Vitest</span></div>
-            <div class="stat"><span class="stat__n">≥90 %</span><span class="stat__l">cobertura SPA · gate CI</span></div>
+            <div class="stat"><span class="stat__n">≥85%</span><span class="stat__l">cobertura mínima</span></div>
           </div>
-          <ul class="u-mt-4">
-            <li class="fragment"><strong>6 workflows</strong> GitHub Actions — lint, tests, build, publicación condicional Docker Hub.</li>
-            <li class="fragment">Trivy <strong>semanal</strong> + en cada PR: SARIF a GitHub Security.</li>
+          <ul class="fragment">
+            <li><strong>6 workflows</strong> de GitHub Actions:
+              <ul>
+                <li>lint - test de Python y Angular</li>
+                <li>build - publicación condicional Docker Hub.</li>
+              </ul>
+            </li>
+            <li>Trivy <strong>semanal</strong> + en cada PR: SARIF a GitHub Security.</li>
+            <li>Dependabot <strong>automático</strong> para actualizaciones de dependencias.</li>
+            <li>Observabilidad con <strong>Railway</strong> y WebHooks de Discord.</li>
           </ul>
           <aside class="notes">
             Para cerrar la parte técnica: la red de seguridad. Casi cuatrocientos tests entre backend
@@ -483,18 +497,17 @@ location /api/ {
         <!-- ═══════════════════════════════════════════════════════════════════
              9 · TRANSICIÓN A DEMO TÉCNICA
              ═══════════════════════════════════════════════════════════════════ -->
-        <section data-background-gradient="linear-gradient(135deg, #3a342a 0%, #2B2B2B 100%)">
+        <section data-background-gradient="linear-gradient(135deg, #FFFFFF 65%, rgba(209, 156, 21, 0.45) 110%)">
           <em class="kicker">Y ahora…</em>
           <h2>Pasamos a la <span class="badge badge--accent">demo técnica</span></h2>
-          <ul>
-            <li class="fragment">Login y dashboard multi-empresa del panel.</li>
-            <li class="fragment">Theme switch sincronizándose entre pestañas en vivo.</li>
-            <li class="fragment">Mapa de calor operativo desde XLSX.</li>
-            <li class="fragment">Vault de comunicaciones con asistente IA.</li>
+          <ul class="fragment">
+            <li>Creación de usuarios y empresa.</li>
+            <li>Login al nuevo usuario.</li>
+            <li>Setting inicial de la empresa a través de API y conexión con Google.</li>
+            <li>Añadido de apartamentos gracias a API externa.</li>
+            <li>Manejo en las distintas herramientas que usan servicios externos.</li>
+            <li>Vault de comunicaciones con asistente IA.</li>
           </ul>
-          <p class="u-muted u-center u-mt-6">
-            <strong>stay-sidekick.com</strong> · el panel real, en producción.
-          </p>
           <aside class="notes">
             Hasta aquí la parte conceptual. A partir de este punto pasamos a la demo técnica en vivo
             sobre stay-sidekick.com: login, theme switch entre pestañas, mapa de calor y vault con IA.

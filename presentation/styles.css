@@ -401,6 +401,12 @@ body.reveal-viewport {
   margin: var(--ss-space-2) 0;
 }
 .reveal pre code {
+  --code-burgundy: #9b1c31;
+  --code-burgundy-deep: #6a040f;
+  --code-red: #c1121f;
+  --code-rose: #a4133c;
+  --code-string: #9d4e57;
+  --code-comment: #7a6f72;
   padding: var(--ss-space-2) var(--ss-space-3);
   border-radius: var(--ss-radius-lg);
   font-family: var(--ss-font-mono);
@@ -408,6 +414,62 @@ body.reveal-viewport {
   background: var(--ss-bg-deep);
   color: var(--ss-fg);
   max-height: 56vh;
+}
+.reveal pre code .hljs-keyword,
+.reveal pre code .hljs-selector-tag,
+.reveal pre code .hljs-tag,
+.reveal pre code .hljs-section,
+.reveal pre code .hljs-attribute,
+.reveal pre code .hljs-name,
+.reveal pre code .hljs-selector-id,
+.reveal pre code .hljs-selector-class,
+.reveal pre code .hljs-link {
+  color: var(--code-burgundy);
+  font-weight: 600;
+}
+.reveal pre code .hljs-built_in,
+.reveal pre code .hljs-builtin-name,
+.reveal pre code .hljs-type,
+.reveal pre code .hljs-class .hljs-title,
+.reveal pre code .hljs-meta,
+.reveal pre code .hljs-meta-keyword {
+  color: var(--code-burgundy-deep);
+}
+.reveal pre code .hljs-title,
+.reveal pre code .hljs-function .hljs-title,
+.reveal pre code .hljs-title.function_ {
+  color: var(--code-red);
+  font-weight: 600;
+}
+.reveal pre code .hljs-number,
+.reveal pre code .hljs-literal,
+.reveal pre code .hljs-symbol,
+.reveal pre code .hljs-bullet,
+.reveal pre code .hljs-variable,
+.reveal pre code .hljs-template-variable,
+.reveal pre code .hljs-attr,
+.reveal pre code .hljs-params {
+  color: var(--code-rose);
+}
+.reveal pre code .hljs-string,
+.reveal pre code .hljs-meta-string,
+.reveal pre code .hljs-regexp,
+.reveal pre code .hljs-addition {
+  color: var(--code-string);
+}
+.reveal pre code .hljs-comment,
+.reveal pre code .hljs-quote {
+  color: var(--code-comment);
+  font-style: italic;
+}
+.reveal pre code .hljs-deletion {
+  color: var(--code-red);
+}
+.reveal pre code .hljs-emphasis {
+  font-style: italic;
+}
+.reveal pre code .hljs-strong {
+  font-weight: 700;
 }
 
 .u-lead {

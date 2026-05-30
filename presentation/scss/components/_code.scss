@@ -1,5 +1,8 @@
 // =============================================================================
 // COMPONENTS · code — bloques pre / code (reveal + highlight.js)
+// Monokai recoloreado a paleta BURDEOS para que contraste sobre el fondo claro.
+// styles.css se carga después de monokai.css → estas reglas ganan por orden y
+// especificidad (.reveal pre code .hljs-*).
 // =============================================================================
 
 .reveal pre {
@@ -12,6 +15,15 @@
   margin: var(--ss-space-2) 0;
 
   code {
+    // Tokens de la paleta — distintos tonos de burdeos/rojo, todos legibles
+    // sobre el fondo claro del bloque de código.
+    --code-burgundy:       #9b1c31; // base — keywords, directivas, tags
+    --code-burgundy-deep:  #6a040f; // built_in, tipos, clases, meta
+    --code-red:            #c1121f; // funciones, títulos, nombres
+    --code-rose:           #a4133c; // números, literales, símbolos, variables
+    --code-string:         #9d4e57; // strings — rosa viejo apagado
+    --code-comment:        #7a6f72; // comentarios — gris cálido tenue
+
     padding: var(--ss-space-2) var(--ss-space-3);
     border-radius: var(--ss-radius-lg);
     font-family: var(--ss-font-mono);
@@ -19,5 +31,71 @@
     background: var(--ss-bg-deep);
     color: var(--ss-fg);
     max-height: 56vh;
+
+    // -- Keywords / estructura (en nginx: directivas via .hljs-attribute) -----
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-tag,
+    .hljs-section,
+    .hljs-attribute,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-link {
+      color: var(--code-burgundy);
+      font-weight: 600;
+    }
+
+    // -- Built-in / tipos / meta ---------------------------------------------
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-type,
+    .hljs-class .hljs-title,
+    .hljs-meta,
+    .hljs-meta-keyword {
+      color: var(--code-burgundy-deep);
+    }
+
+    // -- Funciones / títulos / nombres ---------------------------------------
+    .hljs-title,
+    .hljs-function .hljs-title,
+    .hljs-title.function_ {
+      color: var(--code-red);
+      font-weight: 600;
+    }
+
+    // -- Números / literales / símbolos / variables --------------------------
+    .hljs-number,
+    .hljs-literal,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-attr,
+    .hljs-params {
+      color: var(--code-rose);
+    }
+
+    // -- Cadenas --------------------------------------------------------------
+    .hljs-string,
+    .hljs-meta-string,
+    .hljs-regexp,
+    .hljs-addition {
+      color: var(--code-string);
+    }
+
+    // -- Comentarios ----------------------------------------------------------
+    .hljs-comment,
+    .hljs-quote {
+      color: var(--code-comment);
+      font-style: italic;
+    }
+
+    .hljs-deletion {
+      color: var(--code-red);
+    }
+
+    .hljs-emphasis { font-style: italic; }
+    .hljs-strong   { font-weight: 700; }
   }
 }
